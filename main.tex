@@ -44,7 +44,8 @@ For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be
 $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
 $C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ}, it is
 preserved under suitable compositions~\cite{OT13}, and weaker forms and bounds with extra factors are
-in~\cite{CKLS,WWW,KKLMS,Han}; lower bounds on the best constant are in~\cite{Hod}. The erasure entropy of $f$ at a
+in~\cite{CKLS,WWW,KKLMS,Han}; the min-entropy version is known for read-$k$ DNFs with $k$
+fixed~\cite{Shalev,ACKSW}; lower bounds on the best constant are in~\cite{Hod}. The erasure entropy of $f$ at a
 coordinate $x$ is $E_x(f)=H(\mathbf 1[x\in U]\mid U\setminus\{x\})$, the conditional entropy of one coordinate given
 the others in the sense of Verd\'u and Weissman~\cite{VW08}, and with $\Inf_x(f)=\Pr[x\in U]$ the conjecture holds if
 and only if $\sup_f\min_{x:\Inf_x(f)>0}E_x(f)/\Inf_x(f)$ is finite~\cite{Shm1}, which builds on the
@@ -71,8 +72,9 @@ $\Pr[y_j=1]=P_t$ for $j\le m$ and $1-P_t$ for $j>m$, where
 \[
 P_t=\Pr\bigl[\mathrm{Bin}(2t,\tfrac12)\ge t\bigr]=\frac12+\binom{2t}{t}2^{-2t-1};
 \]
-the biased form of the conjecture is in~\cite{KMS12}. For $t=1$, $P_1=\frac34$ and the ratio at $x$ is
-$(1+o(1))(k-1)\log_2\frac43$~\cite{Shm9}; for fixed $t\ge2$ it was not known to be unbounded~\cite[Section~5]{Shm8}.
+the biased form of the conjecture is in~\cite{KMS12}, and a sharp lower bound on the biased Fourier entropy by a
+sum of coordinate-wise terms is in~\cite{Cha25}. For $t=1$, $P_1=\frac34$ and the ratio at $x$ is
+$(1+o(1))(k-1)\log_2\frac43$~\cite{Shm9}. Here we treat every fixed $t\ge1$, and more generally every rational bias.
 
 For $P\in(0,1)$ write $E_x^P(\tilde f_k)$ and $\Inf_x^P(\tilde f_k)$ for the erasure entropy and the influence of $x$
 for the law $c(S)^2$, where $c(S)$ are the coefficients of $\tilde f_k$, in $\pm1$ values, in the orthonormal basis of
@@ -534,6 +536,11 @@ The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
 
 \begin{thebibliography}{99}
+\bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
+entropy and min-entropy, ACM Trans. Comput. Theory 13 (2021), no.~4, 1--40, doi:10.1145/3470860; arXiv:1809.09819.
+\bibitem{Shalev} G.~Shalev, On the Fourier entropy influence conjecture for extremal classes, arXiv:1806.03646, 2018.
+\bibitem{Cha25} F.~Chang, A lower bound for the Fourier entropy of Boolean functions on the biased hypercube,
+arXiv:2511.07739, 2025.
 \bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy, Theoret.
 Comput. Sci. 654 (2016), 92--112.
 \bibitem{FS09} P.~Flajolet, R.~Sedgewick, \emph{Analytic Combinatorics}, Cambridge University Press, 2009.
