@@ -1,0 +1,460 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Inf}{\mathrm{Inf}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\MAJ}{\mathrm{MAJ}}
+\newcommand{\ii}{\mathrm{i}}
+
+\title{The erasure entropy of a forced coordinate under every bias}
+\author{Yitzchak Shmalo}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+A monotone Boolean function $F_{k,t}$, built from a majority function on $k$ inputs with one hidden coordinate $x$ by
+substituting threshold functions of $2t$ fresh variables, has $x$ as the only variable lying both in a shortest
+minterm and in a shortest maxterm. The ratio $E_x/\Inf_x$ of the erasure entropy to the influence at $x$ was known to
+be unbounded when $k$ and $t$ grow together, and to grow linearly in $k$ for $t=1$. We show that for every fixed
+$t\ge1$ it equals $(1+o(1))\log_2(1/\Inf_x)=(1+o(1))(k-1)\log_2(1/P_t)$, where $P_t$ is the probability that a binomial
+variable with parameters $2t$ and $\frac12$ is at least $t$. More generally the same holds for the underlying majority
+function under every rational product bias $P\in(\frac12,1)$, the phase of the relevant coefficients advancing by
+$\arccos\frac{2P-1}{2P}$, an irrational multiple of $\pi$. At $P=\frac12$ that angle is $\frac\pi2$, and the behaviour
+changes: there the coefficients are values of Krawtchouk polynomials at the middle of their range, half of them
+vanish, and the ratio is $\frac12\log_2(1/\Inf_x)-\frac12\log_2\log_2(1/\Inf_x)+O(1)$, which we derive from an exact
+single-sum formula.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be a random subset with
+$\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
+$C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ}, it is
+preserved under suitable compositions~\cite{OT13}, and weaker forms and bounds with extra factors are
+in~\cite{CKLS,WWW,KKLMS,Han}; lower bounds on the best constant are in~\cite{Hod}. The erasure entropy of $f$ at a
+coordinate $x$ is $E_x(f)=H(\mathbf 1[x\in U]\mid U\setminus\{x\})$, the conditional entropy of one coordinate given
+the others in the sense of Verd\'u and Weissman~\cite{VW08}, and with $\Inf_x(f)=\Pr[x\in U]$ the conjecture holds if
+and only if $\sup_f\min_{x:\Inf_x(f)>0}E_x(f)/\Inf_x(f)$ is finite~\cite{Shm1}. Since conditioning does not increase
+entropy,
+\begin{equation}\label{eq:upper}
+\frac{E_x(f)}{\Inf_x(f)}\le\frac{h_2(\Inf_x(f))}{\Inf_x(f)}\le\log_2\frac{e}{\Inf_x(f)}
+\end{equation}
+for every $f$ and $x$ with $\Inf_x(f)>0$.
+
+The question is which coordinate to take. In~\cite{Shm8} several selection rules are shown to fail on monotone
+functions, among them the rule that takes, among the variables lying both in a shortest minterm and in a shortest
+maxterm, one of smallest ratio. Fix an odd $k=2m+1$, let $y^0\in\{0,1\}^k$ have $y^0_j=1$ for $j\le m$ and
+$y^0_j=0$ for $j>m$, let $y^1=y^0+e_{m+1}$, let $M$ be $\MAJ_k$ with the point $y^1$ removed from its true set, and
+\[
+\tilde f_k(y,x)=M(y)\vee\bigl(x\wedge[y\ge y^0]\bigr).
+\]
+For $t\ge1$ the function $F_{k,t}$ of~\cite[Section~5]{Shm8} replaces $y_j$ by the threshold function ``at least $t$
+of $2t$'' of a block of fresh variables for $j\le m$, and by ``at least $t+1$ of $2t$'' for $j>m$. It is monotone, and
+$x$ is the only variable lying both in a shortest minterm and in a shortest maxterm. Moreover~\cite[proof of
+Proposition~12]{Shm8} $E_x(F_{k,t})$ and $\Inf_x(F_{k,t})$ equal the erasure entropy and the influence of $x$ in the
+expansion of $\tilde f_k$ in the $\mu$-biased Fourier basis~\cite[Chapter~8]{OD14} of the product measure with
+$\Pr[y_j=1]=P_t$ for $j\le m$ and $1-P_t$ for $j>m$, where
+\[
+P_t=\Pr\bigl[\mathrm{Bin}(2t,\tfrac12)\ge t\bigr]=\frac12+\binom{2t}{t}2^{-2t-1};
+\]
+the biased form of the conjecture is in~\cite{KMS12}. For $t=1$, $P_1=\frac34$ and the ratio at $x$ is
+$(1+o(1))(k-1)\log_2\frac43$~\cite{Shm9}; for fixed $t\ge2$ it was not known to be unbounded~\cite[Section~5]{Shm8}.
+
+For $P\in(0,1)$ write $E_x^P(\tilde f_k)$ and $\Inf_x^P(\tilde f_k)$ for the erasure entropy and the influence of $x$
+for the law $c(S)^2$, where $c(S)$ are the coefficients of $\tilde f_k$, in $\pm1$ values, in the orthonormal basis of
+the product measure with $\Pr[y_j=1]=P$ for $j\le m$, $\Pr[y_j=1]=1-P$ for $j>m$, and $x$ uniform. At $P=\frac12$
+these are $E_x(\tilde f_k)$ and $\Inf_x(\tilde f_k)$. Let $\alpha_P=\arccos\frac{2P-1}{2P}$.
+
+\begin{theorem}\label{thm:bias}
+Let $P\in(\frac12,1)$ with $\alpha_P/\pi$ irrational. Then $\Inf_x^P(\tilde f_k)=P^{k-1}$ and, as $k\to\infty$ through
+odd values,
+\[
+\frac{E_x^P(\tilde f_k)}{\Inf_x^P(\tilde f_k)}=(1+o(1))\log_2\frac1{\Inf_x^P(\tilde f_k)}=(1+o(1))\,(k-1)\log_2\frac1P .
+\]
+The condition holds for every rational $P\in(\frac12,1)$.
+\end{theorem}
+
+\begin{corollary}\label{cor:t}
+For every fixed $t\ge1$, $\Inf_x(F_{k,t})=P_t^{k-1}$ and $E_x(F_{k,t})/\Inf_x(F_{k,t})=(1+o(1))(k-1)\log_2(1/P_t)$ as
+$k\to\infty$. In particular the minterm-maxterm rule of~\cite{Shm8} has unbounded ratio on the functions $F_{k,t}$
+with $t$ fixed.
+\end{corollary}
+
+The corollary is Theorem~\ref{thm:bias} with $P=P_t$, which is rational, together with the reduction quoted above.
+The case $P=\frac34$ is the theorem of~\cite{Shm9}, and the proof below follows that paper; what makes it work for
+every $P$ are three identities on the unit circle, \eqref{eq:ident} below.
+
+At $P=\frac12$ the rotation angle $\alpha_{1/2}$ is $\frac\pi2$ and the argument breaks down for a reason that can be
+made exact. Write $\Psi(r)=r^2\log_2(1+r^{-2})+\log_2(1+r^2)$ for $r>0$ and $\Psi(0)=0$.
+
+\begin{theorem}\label{thm:half}
+Let $k=2m+1$. Then $\Inf_x(\tilde f_k)=2^{-2m}$ and
+\[
+\frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}=4^{-m}\sum_{b=0}^{m-1}\binom{2m}{2b+1}\,
+\Psi\Bigl(\binom mb\binom{2m}m\Big/\binom{2m}{2b}\Bigr).
+\]
+Moreover $\bigl|E_x(\tilde f_k)/\Inf_x(\tilde f_k)-m+\frac12\log_2m\bigr|\le C$ for an absolute constant $C$, so
+\[
+\frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}=\frac12\log_2\frac1{\Inf_x(\tilde f_k)}
+-\frac12\log_2\log_2\frac1{\Inf_x(\tilde f_k)}+O(1).
+\]
+\end{theorem}
+
+In~\cite[Proposition~11]{Shm8} the ratio of $\tilde f_k$ was shown to be at least $(\frac18-o(1))(k-1)$; the
+theorem gives the constant $\frac12$. The factor $\frac12$ has a direct meaning: on exactly half of the spectral weight
+of the derivative in $x$ the average over $x$ has a vanishing coefficient, so there $x\in U$ is determined by
+$U\setminus\{x\}$ and contributes no entropy. As $t\to\infty$ with $k$ fixed the ratio of $F_{k,t}$ tends to that of
+$\tilde f_k$~\cite[Proposition~12]{Shm8}, while for each fixed $t$ the ratio is asymptotic to the bound
+\eqref{eq:upper}; the two limits do not commute.
+
+\section{The ratio as a double sum}\label{sec:sum}
+
+All logarithms are to base $2$ unless written $\ln$. For $p,q\ge0$ let $\Phi(p,q)=p\log\frac{p+q}{p}+q\log\frac{p+q}{q}$,
+with $\Phi(p,0)=\Phi(0,q)=0$, so that $\Psi(r)=\Phi(r^2,1)$. Then $\Psi\ge0$, $\Psi(r)\ge\log r^2$ for $r\ge1$, and
+$\Psi(r)\le\log r^2+1+\log e$ for $r\ge1$.
+
+Fix $P\in[\frac12,1)$ and put $q=1-P$ and $\sigma=\sqrt{Pq}$. In the basis $\prod_{j\in S}\phi_j(y_j)$, with
+$\phi_j(y)=(y-\mu_j)/\sigma$, $\mu_j=P$ for $j\le m$ and $\mu_j=q$ for $j>m$, and with $+1$ for true,
+$\tilde f_k=\bar A+(2x-1)D$, where
+\[
+D=\mathbf 1[y=y^0]+\mathbf 1[y=y^1],\qquad \bar A=2N-1+\mathbf 1[y=y^0]-\mathbf 1[y=y^1],\qquad
+N=\mathbf 1[|y|\ge m+1].
+\]
+For $S\subseteq[k]$ let $u=|S\cap\{1,\dots,m\}|$ and $v=|S\cap\{m+2,\dots,k\}|$, and put
+\begin{gather*}
+X(z)=q+Pz,\qquad Y(z)=P+qz,\\
+H_{uv}(z)=(z-1)^{u+v}X(z)^{m-u}Y(z)^{m+1-v},\qquad t_{uv}=\sum_{c\ge m+1}[z^c]H_{uv}(z).
+\end{gather*}
+
+\begin{lemma}\label{lem:coef}
+If $m+1\in S$ then $\hat D(S)=0$. If $m+1\notin S$ then $\hat D(S)=(-1)^v\sigma^{u+v}P^{2m-u-v}$ and
+$\hat{\bar A}(S)=2\sigma^{u+v}t_{uv}-\mathbf 1[S=\emptyset]+(P-q)\hat D(S)$.
+\end{lemma}
+
+\begin{proof}
+This is~\cite[Lemma~1]{Shm9} with $P$ in place of $\frac34$. For a point $w$,
+$\widehat{\mathbf 1[y=w]}(S)=\Pr[y=w]\prod_{j\in S}\phi_j(w_j)$, and $\Pr[y=y^0]=P^{2m+1}$, $\Pr[y=y^1]=P^{2m}q$. If
+$m+1\in S$ the two terms of $\hat D(S)$ are $P^{2m+1}\phi_{m+1}(0)=-P^{2m}\sigma$ and $P^{2m}q\,\phi_{m+1}(1)=P^{2m}\sigma$
+times the same product, and cancel. Otherwise both points give the product $(-1)^v(q/P)^{(u+v)/2}$, since
+$\phi_j(1)=\sqrt{q/P}$ for $j\le m$ and $\phi_j(0)=-\sqrt{q/P}$ for $j\ge m+2$; this gives $\hat D(S)$, and the
+difference of the two indicators has coefficient $(P-q)\hat D(S)$. Finally $\E[z^{y_j}\phi_j(y_j)]=\sigma(z-1)$ and
+$\E[z^{y_j}]=1-\mu_j+\mu_jz$, so $\E[z^{|y|}\prod_{j\in S}\phi_j(y_j)]=\sigma^{u+v}H_{uv}(z)$ when $m+1\notin S$, and
+$\hat N(S)$ is the sum of its coefficients at $z^c$, $c\ge m+1$.
+\end{proof}
+
+Let $\beta_u=\binom mu q^uP^{m-u}$ and, for $0\le u,v\le m$,
+\[
+r_{uv}=\frac{\bigl|2t_{uv}-\mathbf 1[u=v=0]+(P-q)(-1)^vP^{2m-u-v}\bigr|}{P^{2m-u-v}}.
+\]
+
+\begin{lemma}\label{lem:sum}
+$\Inf_x^P(\tilde f_k)=P^{2m}$ and $E_x^P(\tilde f_k)/\Inf_x^P(\tilde f_k)=\sum_{u,v=0}^m\beta_u\beta_v\,\Psi(r_{uv})$.
+\end{lemma}
+
+\begin{proof}
+As in~\cite[Lemma~2]{Shm9}: $E_x=\sum_S\Phi(\hat{\bar A}(S)^2,\hat D(S)^2)$ and $\Inf_x=\sum_S\hat D(S)^2$, the terms
+with $m+1\in S$ vanish, there are $\binom mu\binom mv$ sets with given $(u,v)$ and $m+1\notin S$,
+$\sum_{u,v}\binom mu\binom mv(Pq)^{u+v}P^{2(2m-u-v)}=(Pq+P^2)^{2m}=P^{2m}$, and
+$\Phi(\hat{\bar A}^2,\hat D^2)=\hat D^2\Psi(|\hat{\bar A}|/|\hat D|)$ with $|\hat{\bar A}(S)|/|\hat D(S)|=r_{uv}$.
+\end{proof}
+
+If $u+v\ge1$ then $Q_{uv}=H_{uv}/(z-1)$ is a polynomial and $t_{uv}=[z^m]Q_{uv}$: writing $Q_{uv}=\sum_cg_cz^c$, the
+sum $\sum_{c\ge m+1}(g_{c-1}-g_c)$ telescopes to $g_m$~\cite[Lemma~3]{Shm9}.
+
+\section{The unbiased case}\label{sec:half}
+
+Here $P=q=\frac12$, so $X=Y=(1+z)/2$, the term $(P-q)\hat D$ is absent, and $\beta_u=\binom mu2^{-m}$. For
+$0\le a\le 2m$ let
+\[
+\kappa_a=[z^m](1-z)^a(1+z)^{2m-a},
+\]
+the value at $a$ of the Krawtchouk polynomial of degree $m$ for length $2m$~\cite[Chapter~5, \S7]{MS77}.
+
+\begin{lemma}\label{lem:kraw}
+$\kappa_a=0$ for odd $a$, and $\kappa_{2b}=(-1)^b\binom mb\binom{2m}m\big/\binom{2m}{2b}$.
+\end{lemma}
+
+\begin{proof}
+For a variable $s$,
+\[
+\sum_{a=0}^{2m}\binom{2m}a\kappa_as^a=[z^m]\bigl((1+z)+s(1-z)\bigr)^{2m}=[z^m]\bigl((1+s)+(1-s)z\bigr)^{2m}
+=\binom{2m}m(1-s^2)^m .
+\]
+Comparing coefficients of $s^a$ gives the claim.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:half}]
+By Lemma~\ref{lem:sum}, $\Inf_x=2^{-2m}$. For $u+v\ge1$ put $a=u+v-1$; then
+\[
+\frac{2t_{uv}}{P^{2m-u-v}}=2^{2m-u-v+1}\,[z^m](z-1)^a\Bigl(\frac{1+z}2\Bigr)^{2m-a}=(-1)^a\kappa_a ,
+\]
+so $r_{uv}=|\kappa_{u+v-1}|$. For $u=v=0$, $t_{00}=\Pr[|y|\ge m+1]=\frac12$ and $r_{00}=0$. The weight of the pairs
+with $u+v=s$ is $\sum_{u+v=s}\beta_u\beta_v=\binom{2m}s4^{-m}$, and by Lemma~\ref{lem:kraw} only odd $s=2b+1$ give
+$r\ne0$, with $r=\binom mb\binom{2m}m/\binom{2m}{2b}$. This is the formula. Since $\binom{2m}{2b}\le\binom{2m}m$, these
+values satisfy $r\ge\binom mb\ge1$.
+
+For the asymptotics write $w_b=\binom{2m}{2b+1}4^{-m}$ and $\delta_b=(2b-m)^2/m$. The odd binomial coefficients of
+order $2m$ sum to $2^{2m-1}$, so $\sum_bw_b=\frac12$, and if $s$ is binomial with parameters $2m$ and $\frac12$ then
+$\sum_bw_b\delta_b\le\E[(s-1-m)^2]/m=\frac12+\frac1m$. We use $h(p)\ge4p(1-p)=1-(2p-1)^2$ for the binary entropy $h$
+and, for $1\le j\le n-1$,
+\begin{equation}\label{eq:binom}
+\frac{2^{nh(j/n)}}{\sqrt{8j(n-j)/n}}\le\binom nj\le\frac{2^{nh(j/n)}}{\sqrt{2\pi j(n-j)/n}}
+\end{equation}
+\cite[Chapter~10, Lemma~7]{MS77}, together with $\binom{2m}m\le4^m/\sqrt{\pi m}$.
+
+Lower bound. By~\eqref{eq:binom} with $n=m$ and $8b(m-b)/m\le2m$, $\log\binom mb\ge m\,h(b/m)-\frac12\log(2m)\ge
+m-\delta_b-\frac12\log m-\frac12$ for $1\le b\le m-1$, and this also holds for $b=0$. As $\Psi(r)\ge\log r^2$,
+\[
+\frac{E_x}{\Inf_x}\ge2\sum_bw_b\log\binom mb\ge m-\tfrac12\log m-\tfrac32-\tfrac2m .
+\]
+
+Upper bound. For $1\le b\le m-1$, \eqref{eq:binom} applied to $\binom mb$ from above and to $\binom{2m}{2b}$ from below
+gives
+\begin{align*}
+\log r=\log\binom mb+\log\binom{2m}m-\log\binom{2m}{2b}
+&\le 2m-m\,h(b/m)-\tfrac12\log m+\tfrac32-\log\pi\\
+&\le m+\delta_b-\tfrac12\log m+1 ,
+\end{align*}
+the factors $b(m-b)/m$ cancelling. For $b=0$, $r=\binom{2m}m\le4^m$ and $w_0=2m4^{-m}$. With
+$\Psi(r)\le\log r^2+1+\log e$,
+\[
+\frac{E_x}{\Inf_x}\le\sum_{b\ge1}w_b\bigl(2m+2\delta_b-\log m+3+\log e\bigr)+w_0(4m+3)
+\le m-\tfrac12\log m+C .
+\]
+Finally $\log_2(1/\Inf_x)=2m$, and $\frac12\log m=\frac12\log(2m)-\frac12$.
+\end{proof}
+
+\begin{remark}
+The proof shows where the weight sits: $r=0$ exactly when $u+v$ is even, which is half of the weight, and on the other
+half $\log r^2$ is $2m-\log m+O(1)$ for typical $b$. A Gaussian approximation of the three binomial coefficients
+suggests $E_x/\Inf_x=m-\frac12\log m+c_0+o(1)$ with $c_0=\frac34\log e-\frac12\log\frac\pi2=0.7563\ldots$; the exact
+sum gives $E_x/\Inf_x-m+\frac12\log m=0.7565$ at $k=4001$ (Section~\ref{sec:num}). We have not proved the constant.
+\end{remark}
+
+\section{The tail on the unit circle}\label{sec:circle}
+
+From now on $P\in(\frac12,1)$. For $z=e^{\ii\theta}$ and $w=\cos\theta$,
+\[
+|z-1|^2=2-2w,\qquad |X(z)|^2=|Y(z)|^2=R(w):=P^2+q^2+2Pqw,
+\]
+and $X(z)=z\,\overline{Y(z)}$. Put $n_1=u+v-1$ and $n_2=2m+1-u-v$, so $n_1+n_2=2m$. Then
+$|Q_{uv}(e^{\ii\theta})|=e^{\rho(\cos\theta)}$ with
+\[
+\rho(w)=\frac{n_1}2\ln(2-2w)+\frac{n_2}2\ln R(w),\qquad
+\rho''(w)=-\frac{n_1}{2(1-w)^2}-\frac{2P^2q^2n_2}{R(w)^2}\le-2P^2q^2n_2 ,
+\]
+using $R\le1$. So $\rho$ is strictly concave on $[-1,1)$, with maximum at
+\[
+w_0=\frac{2Pq\,n_2-(P^2+q^2)\,n_1}{4Pq\,m}
+\]
+when this lies in $(-1,1)$. A short computation gives $2-2w_0=n_1/(2Pqm)$ and $R(w_0)=n_2/(2m)$, hence
+\begin{equation}\label{eq:peak}
+\rho(w_0)=\frac{n_1}2\ln\frac{n_1}{2Pqm}+\frac{n_2}2\ln\frac{n_2}{2m}.
+\end{equation}
+The law $\beta_u$ has mean $mq$ and variance $mPq$. For $\lambda\ge1$ let $W_\lambda$ be the set of $(u,v)$ with
+$|u-mq|\le\lambda\sqrt m$ and $|v-mq|\le\lambda\sqrt m$. Below, $c,C$ are positive constants that may depend on $P$
+and $\lambda$ but not on $m$ or on $(u,v)\in W_\lambda$, and $m$ is large enough for each statement. On $W_\lambda$,
+$n_1=2mq+O(\sqrt m)$ and $w_0=w^*+O(m^{-1/2})$, where
+\[
+w^*=\frac{2P-1}{2P}=\cos\alpha_P\in(0,\tfrac12).
+\]
+Put $\theta_0=\arccos w_0$, $z_0=e^{\ii\theta_0}$, $\theta^*=\alpha_P$ and $z^*=e^{\ii\theta^*}$. Since
+$1-w^*=1/(2P)$, the real part of $(z^*-1)(q+P\bar z^*)$ is $(P-q)(1-w^*)=w^*$ and its imaginary part is $\sin\theta^*$, and
+$R(w^*)=P^2+q^2+q(P-q)=P$; so
+\begin{equation}\label{eq:ident}
+(z^*-1)\,\overline{X(z^*)}=z^*,\qquad |X(z^*)|^2=P,\qquad Y(z^*)=z^*\,\overline{X(z^*)} .
+\end{equation}
+
+\begin{lemma}\label{lem:exponent}
+On $W_\lambda$, $\rho(w_0)+(n_2-1)\ln\frac1P\ge(m-1)\ln\frac1P$.
+\end{lemma}
+
+\begin{proof}
+Regard the left side, by~\eqref{eq:peak}, as a function $G(n_1)$ of a real $n_1\in(0,2m)$ with $n_2=2m-n_1$. Then
+$G'(n_1)=\frac12\ln\frac{n_1}{Pq\,n_2}+\ln P$, which vanishes at $n_1=2mq$, and $G''=\frac1{2n_1}+\frac1{2n_2}>0$.
+So $G\ge G(2mq)=mq\ln\frac1P+mP\ln P+(2mP-1)\ln\frac1P=(m-1)\ln\frac1P$.
+\end{proof}
+
+Fix $(u,v)\in W_\lambda$ and let $\Lambda(\theta)=\ln Q_{uv}(e^{\ii\theta})-\ii m\theta$ for complex $\theta$ with
+$|\theta-\theta^*|\le\delta$, where $\delta>0$ is so small that $e^{\ii\theta}$ stays away from $1$, $-q/P$ and $-P/q$,
+the zeros of $z-1$, $X$ and $Y$; the logarithm is the branch continuous in this disc. Then $|\Lambda''|,|\Lambda'''|\le Cm$
+on the disc. For real $\theta$, $\mathrm{Re}\,\Lambda(\theta)=\rho(\cos\theta)$, so $\mathrm{Re}\,\Lambda'(\theta_0)=0$ and
+$\mathrm{Re}\,\Lambda''(\theta_0)=\rho''(w_0)\sin^2\theta_0\le-cm$. Put
+\[
+b=\mathrm{Im}\,\Lambda'(\theta_0),\qquad A=-\Lambda''(\theta_0),\qquad
+T_{uv}=\frac{1}{\sqrt{2\pi A}}\exp\Bigl(\Lambda(\theta_0)-\frac{b^2}{2A}\Bigr).
+\]
+
+\begin{lemma}\label{lem:laplace}
+On $W_\lambda$: $|b|\le C\sqrt m$, $|T_{uv}|\ge c\,m^{-1/2}e^{\rho(w_0)}$, and
+$t_{uv}=2\,\mathrm{Re}\,T_{uv}+O(|T_{uv}|\,m^{-1/5})$.
+\end{lemma}
+
+\begin{proof}
+With $a=u/m$ and $a'=v/m$, $\Lambda'(\theta)/m$ differs by $O(1/m)$ from
+\[
+\ii z\Bigl(\frac{a+a'}{z-1}+\frac{(1-a)P}{X(z)}+\frac{(1-a')q}{Y(z)}\Bigr)-\ii,\qquad z=e^{\ii\theta},
+\]
+a smooth function of $(a,a',\theta)$. It vanishes at $a=a'=q$, $\theta=\theta^*$: by~\eqref{eq:ident},
+$1/(z^*-1)=\overline{X^*}/z^*$, $1/X^*=\overline{X^*}/P$ and $1/Y^*=X^*/(Pz^*)$, where $X^*=X(z^*)$, so
+\[
+z^*\Bigl(\frac{2q}{z^*-1}+\frac{P^2}{X^*}+\frac{Pq}{Y^*}\Bigr)=2q\overline{X^*}+Pz^*\overline{X^*}+qX^*
+=3q^2+P^2+4Pq\,w^*=1 .
+\]
+The rest is the proof of~\cite[Lemma~5]{Shm9}. Since $a-q$, $a'-q$ and $\theta_0-\theta^*$ are $O(m^{-1/2})$,
+$|\Lambda'(\theta_0)|\le C\sqrt m$, and $\mathrm{Re}(b^2/A)=b^2\mathrm{Re}A/|A|^2\le C$, which gives the lower bound
+on $|T_{uv}|$. By Cauchy's formula~\cite[Chapter~VIII]{FS09}, $t_{uv}=\frac1{2\pi}\int_{-\pi}^\pi e^{\Lambda(\theta)}d\theta$.
+On $J_+=\{|\theta-\theta_0|\le m^{-2/5}\}$, Taylor's formula $\Lambda(\theta_0+h)=\Lambda(\theta_0)+\ii bh-\frac12Ah^2+O(m|h|^3)$
+and a Gaussian integral give $T_{uv}+O(|T_{uv}|m^{-1/5})$; the integral over $J_-=-J_+$ is its complex conjugate,
+as $Q_{uv}$ has real coefficients. Off $J_+\cup J_-$, $|\cos\theta-w_0|\ge c|\theta\mp\theta_0|$ because $\theta_0$
+stays away from $0$ and $\pi$, and $\rho''\le-cm$ gives a modulus at most $e^{\rho(w_0)-cm^{1/5}}$.
+\end{proof}
+
+\begin{lemma}\label{lem:phase}
+If $(u,v)$ and $(u+1,v)$ lie in $W_\lambda$, then $\arg T_{u+1,v}-\arg T_{uv}=\alpha_P+O(m^{-1/2})$ modulo $2\pi$.
+\end{lemma}
+
+\begin{proof}
+Let $g(z)=(z-1)/X(z)$, so $Q_{u+1,v}=gQ_{uv}$. Passing from $(u,v)$ to $(u+1,v)$ changes $w_0$ by $-1/(4Pqm)$, so
+$\theta_0$ moves by $O(1/m)$, and as in~\cite[Lemma~6]{Shm9} $\arg T$ moves by $\mathrm{Im}\ln g(z_0)+O(m^{-1/2})$. By
+\eqref{eq:ident}, $g(z^*)=(z^*-1)\overline{X^*}/|X^*|^2=z^*/P$, so $\arg g(z^*)=\theta^*=\alpha_P$, and
+$z_0-z^*=O(m^{-1/2})$.
+\end{proof}
+
+If $P$ is rational then so is $\cos\alpha_P=(2P-1)/(2P)$, and it lies in $(0,\frac12)$; by Niven's
+theorem~\cite{Niv} a rational multiple of $\pi$ with rational cosine has cosine in $\{0,\pm\frac12,\pm1\}$, so
+$\alpha_P/\pi$ is irrational. This is the last claim of Theorem~\ref{thm:bias}.
+
+\section{Proof of Theorem~\ref{thm:bias}}\label{sec:proof}
+
+The influence is Lemma~\ref{lem:sum} and the upper bound is~\eqref{eq:upper}. The lower bound is the argument
+of~\cite[Section~4]{Shm9}, which we repeat with the constants of a general $P$. Fix $\varepsilon\in(0,\frac14)$,
+$\lambda\ge1$ and $L\ge1$ so large that for every real $\psi_0$ at most $3\varepsilon L$ of the numbers
+$\ell=0,\dots,L-1$ satisfy $|\cos(\psi_0+\ell\alpha_P)|<2\varepsilon$; this is possible because $\ell\alpha_P/\pi$ is
+equidistributed modulo $1$~\cite{Weyl16}. Fix $v$ and cut the $u$ with $(u,v)\in W_\lambda$ into blocks of $L$
+consecutive values. By Lemma~\ref{lem:phase}, in each block at most $3\varepsilon L$ values have
+$|\cos\arg T_{uv}|<\varepsilon$ once $m$ is large. On $W_\lambda$, $\beta_{u+1}/\beta_u=(m-u)q/((u+1)P)=1+O(m^{-1/2})$,
+so the weights in a block differ by a factor at most $2$, and the bad values and the left-over values carry
+$\beta_u\beta_v$-weight at most $6\varepsilon+o(1)$ in all.
+
+Let $(u,v)\in W_\lambda$ have $|\cos\arg T_{uv}|\ge\varepsilon$. By Lemma~\ref{lem:laplace},
+$|t_{uv}|\ge\varepsilon|T_{uv}|\ge c\varepsilon m^{-1/2}e^{\rho(w_0)}$, and with $2m-u-v=n_2-1$ and
+Lemma~\ref{lem:exponent},
+\[
+r_{uv}\ge\frac{2|t_{uv}|}{P^{n_2-1}}-(P-q)\ge c\varepsilon m^{-1/2}P^{-(m-1)}-1 ,
+\]
+so $\Psi(r_{uv})\ge\log r_{uv}^2\ge2m\log\frac1P-\log m-C_\varepsilon$. By Chebyshev's inequality $W_\lambda$ has weight
+at least $(1-Pq/\lambda^2)^2$, and since $\Psi\ge0$, Lemma~\ref{lem:sum} gives
+\[
+\frac{E_x^P}{\Inf_x^P}\ge\Bigl(\bigl(1-\tfrac{Pq}{\lambda^2}\bigr)^2-6\varepsilon-o(1)\Bigr)\Bigl(2m\log\frac1P-\log m-C_\varepsilon\Bigr).
+\]
+Dividing by $\log(1/\Inf_x^P)=2m\log\frac1P$ and letting $m\to\infty$, then $\lambda\to\infty$ and $\varepsilon\to0$,
+gives $\liminf\ge1$. \qed
+
+\section{Numerical checks}\label{sec:num}
+
+Lemma~\ref{lem:sum} reduces the ratio to $(m+1)^2$ terms whose ingredients are integers over powers of the denominator
+of $P$; the code computes them exactly in integer arithmetic and evaluates each term of $\Phi$ as
+$p\log(1+q/p)$ with a $\log(1+\cdot)$ routine. For $t=1$ the values agree with those of~\cite{Shm9}, and for $t=0,1,2,3$
+at $k\le27$ with a rational-arithmetic implementation. The quotient of $E_x(F_{k,t})/\Inf_x(F_{k,t})$ by
+$(k-1)\log_2(1/P_t)$, with $P_2=\frac{11}{16}$ and $P_3=\frac{21}{32}$, is:
+\begin{center}
+\begin{tabular}{rrrrrrrr}
+$k$ & $41$ & $81$ & $121$ & $161$ & $201$ & $251$ & $301$\\ \hline
+$t=2$ & $0.849$ & $0.899$ & $0.922$ & $0.936$ & $0.946$ & $0.954$ & $0.960$\\
+$t=3$ & $0.854$ & $0.902$ & $0.928$ & $0.941$ & $0.950$ & $0.958$ & $0.964$\\
+\end{tabular}
+\end{center}
+For $\tilde f_k$ the formula of Theorem~\ref{thm:half} agrees with the double sum at $k=13$, $41$, $81$ and $121$
+to six decimals, and the identity of Lemma~\ref{lem:kraw} was checked against direct expansion for
+$m\le11$. The quotient by $k-1$ is $0.466$, $0.476$, $0.482$, $0.490$, $0.496$ and $0.499$ at $k=41$, $81$, $121$,
+$301$, $1001$ and $4001$, and $E_x/\Inf_x-m+\frac12\log_2m$ is $0.7796$, $0.7677$, $0.7639$, $0.7593$, $0.7572$ and
+$0.7565$ at the same values of $k$.
+
+\section*{Acknowledgements and funding}
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
+Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent
+memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results,
+coordinate who works on what, and audit each other's work. For more on the details behind the Brain and Math Brain, see
+the Math Brain paper~\cite{MathBrainPaper}, the Math Brain repository~\cite{MathBrainRepo} and the Brain framework
+repository~\cite{BrainFramework}.
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's
+Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of
+the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus
+Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant
+4101/25). Computational resources were provided in part by Google Cloud through its education credits program (credit
+530550103).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital.
+These entities are included in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics, and its
+results were developed with the Brain~\cite{BrainFramework} and Math Brain~\cite{MathBrainRepo}. The family $F_{k,t}$
+is from~\cite{Shm8} and the method for $P=\frac34$ from~\cite{Shm9}. Claude Opus 5.5 (Anthropic) found
+Theorems~\ref{thm:bias} and~\ref{thm:half} and their proofs, wrote the numerical checks and prepared the manuscript.
+These checks are not peer review. The author directed the work and is responsible for the content of the paper and for
+decisions concerning its dissemination.
+
+\section*{Code and data availability}
+Code and outputs: \url{https://github.com/yspennstate/fei-forced-coordinate-bias}.
+
+The paper is part of the Math Brain project, whose public repository is
+\url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\begin{thebibliography}{99}
+\bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy, Theoret.
+Comput. Sci. 654 (2016), 92--112.
+\bibitem{FS09} P.~Flajolet, R.~Sedgewick, \emph{Analytic Combinatorics}, Cambridge University Press, 2009.
+\bibitem{FK96} E.~Friedgut, G.~Kalai, Every monotone graph property has a sharp threshold, Proc. Amer. Math. Soc.
+124 (1996), 2993--3002.
+\bibitem{Han} X.~Han, A new bound for the Fourier-entropy-influence conjecture, Combinatorica 45 (2025), no.~1,
+Paper~4, arXiv:2312.08271.
+\bibitem{Hod} R.~Hod, Improved lower bounds for the Fourier entropy/influence conjecture via lexicographic functions,
+arXiv:1711.00762, 2017.
+\bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the Fourier-entropy
+conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
+\bibitem{KMS12} N.~Keller, E.~Mossel, T.~Schlank, A note on the entropy/influence conjecture, Discrete Math. 312
+(2012), 3364--3372, arXiv:1105.2651.
+\bibitem{MS77} F.~J.~MacWilliams, N.~J.~A.~Sloane, \emph{The Theory of Error-Correcting Codes}, North-Holland, 1977.
+\bibitem{OD14} R.~O'Donnell, \emph{Analysis of Boolean Functions}, Cambridge University Press, 2014.
+\bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013.
+\bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
+Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
+\bibitem{VW08} S.~Verd\'u, T.~Weissman, The information lost in erasures, IEEE Trans. Inform. Theory 54 (2008),
+5030--5058.
+\bibitem{WWW} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols, and the Fourier entropy-influence conjecture, ITCS 2014,
+arXiv:1312.3003.
+\bibitem{Weyl16} H.~Weyl, \"Uber die Gleichverteilung von Zahlen mod.~Eins, Math. Ann. 77 (1916), 313--352.
+\bibitem{Niv} I.~Niven, \emph{Irrational Numbers}, Carus Mathematical Monographs 11, Mathematical Association of
+America, 1956, Corollary~3.12.
+\bibitem{Shm1} Y.~Shmalo, The one-coordinate step in the Fourier entropy-influence conjecture,
+\url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}, 2026.
+\bibitem{Shm8} Y.~Shmalo, Hidden coordinates and selection rules in the Fourier entropy-influence conjecture,
+\url{https://github.com/yspennstate/fei-hidden-coordinates}, 2026.
+\bibitem{Shm9} Y.~Shmalo, A forced coordinate with nearly maximal erasure entropy,
+\url{https://github.com/yspennstate/fei-forced-coordinate}, 2026.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
+\url{https://github.com/yspennstate/math-brain-public}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research},
+October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026,
+\url{https://github.com/yspennstate/brain-framework-public}.
+\end{thebibliography}
+
+\end{document}
