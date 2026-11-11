@@ -24,7 +24,7 @@ More generally the same holds for the biased majority under every rational bias 
 relevant coefficients advances by arccos((2P-1)/(2P)), an irrational multiple of pi. At P = 1/2 the coefficients are
 Krawtchouk values at the middle of their range, half of them vanish, and
 
-    E_x/Inf_x = m - (1/2) log2 m + O(1) = (1/2) log2(1/Inf_x) - (1/2) log2 log2(1/Inf_x) + O(1),
+    E_x/Inf_x = m - (1/2) log2 m + c0 + O(1/m),   c0 = (3/4) log2 e - (1/2) log2(pi/2) = 0.75627...,
 
 from an exact single-sum formula.
 
@@ -36,9 +36,10 @@ All programs are Python 3 with no other dependencies.
   integer over a power of the denominator of P). `python forced_fast.py kmin kmax t ...`, with t = 0 for P = 1/2.
 * `code/forced_exact.py` computes the same double sum in rational arithmetic; used as a check for small k.
 * `code/p10_quot.py` prints the quotient of E_x/Inf_x by log2(1/Inf_x) for given k and t. Outputs:
-  `code/quot_t2.txt` and `code/quot_t3.txt` (for t = 0 see `code/kraw_out.txt`).
+  `code/quot_t2.txt` to `code/quot_t4.txt` (for t = 0 see `code/kraw_out.txt`).
 * `code/kraw.py` checks the Krawtchouk identity of Lemma 6 for m <= 11, compares the single sum of Theorem 3 with the
   double sum, and evaluates it up to k = 4001. Output: `code/kraw_out.txt`.
+* `code/c0_check.py` compares the single sum with m - (1/2) log2 m + c0 up to k = 8001. Output: `code/c0_check_out.txt`.
 
 ## Related papers
 

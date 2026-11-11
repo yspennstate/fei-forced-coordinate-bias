@@ -32,8 +32,8 @@ variable with parameters $2t$ and $\frac12$ is at least $t$. More generally the 
 function under every rational product bias $P\in(\frac12,1)$, the phase of the relevant coefficients advancing by
 $\arccos\frac{2P-1}{2P}$, an irrational multiple of $\pi$. At $P=\frac12$ that angle is $\frac\pi2$, and the behaviour
 changes: there the coefficients are values of Krawtchouk polynomials at the middle of their range, half of them
-vanish, and the ratio is $\frac12\log_2(1/\Inf_x)-\frac12\log_2\log_2(1/\Inf_x)+O(1)$, which we derive from an exact
-single-sum formula.
+vanish, and the ratio is $\frac12\log_2(1/\Inf_x)-\frac12\log_2\log_2(1/\Inf_x)+c+O(1/\log_2(1/\Inf_x))$ with
+$c=\frac12+\frac34\log_2e-\frac12\log_2\frac\pi2$, which we derive from an exact single-sum formula.
 \end{abstract}
 
 \maketitle
@@ -106,11 +106,12 @@ Let $k=2m+1$. Then $\Inf_x(\tilde f_k)=2^{-2m}$ and
 \frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}=4^{-m}\sum_{b=0}^{m-1}\binom{2m}{2b+1}\,
 \Psi\Bigl(\binom mb\binom{2m}m\Big/\binom{2m}{2b}\Bigr).
 \]
-Moreover $\bigl|E_x(\tilde f_k)/\Inf_x(\tilde f_k)-m+\frac12\log_2m\bigr|\le C$ for an absolute constant $C$, so
+Moreover $\bigl|E_x(\tilde f_k)/\Inf_x(\tilde f_k)-m+\frac12\log_2m\bigr|\le C$ for an absolute constant $C$, and
 \[
-\frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}=\frac12\log_2\frac1{\Inf_x(\tilde f_k)}
--\frac12\log_2\log_2\frac1{\Inf_x(\tilde f_k)}+O(1).
+\frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}=m-\frac12\log_2m+c_0+O\Bigl(\frac1m\Bigr),\qquad
+c_0=\frac34\log_2e-\frac12\log_2\frac\pi2=0.75627\ldots,
 \]
+so that, with $L=\log_2(1/\Inf_x(\tilde f_k))=2m$, the ratio is $\frac12L-\frac12\log_2L+c_0+\frac12+O(1/L)$.
 \end{theorem}
 
 In~\cite[Proposition~11]{Shm8} the ratio of $\tilde f_k$ was shown to be at least $(\frac18-o(1))(k-1)$; the
@@ -235,13 +236,55 @@ $\Psi(r)\le\log r^2+1+\log e$,
 \le m-\tfrac12\log m+C .
 \]
 Finally $\log_2(1/\Inf_x)=2m$, and $\frac12\log m=\frac12\log(2m)-\frac12$.
+
+The constant. Let $m\ge2$, write $z_b=2b-m$, so that $\delta_b=z_b^2/m$, and let $C$ denote absolute constants.
+First, $r$ is large for every $b$: since $i\mapsto\binom mi$ is log-concave, each term of
+$\binom{2m}{2b}=\sum_i\binom mi\binom m{2b-i}$ is at most $\binom mb^2$, so $\binom{2m}{2b}\le(m+1)\binom mb^2$ and,
+with $\binom{2m}m\ge4^m/(2\sqrt m)$ and $\binom mb\le2^m$,
+\[
+r=\binom mb\binom{2m}m\Big/\binom{2m}{2b}\ge\frac{\binom{2m}m}{(m+1)\binom mb}\ge\frac{2^m}{2(m+1)\sqrt m}.
+\]
+For $r\ge1$ and $u=r^{-2}$, $\Psi(r)-\log r^2-\log e=\log e\,\bigl(\frac{\ln(1+u)}u-1+\ln(1+u)\bigr)$ lies between
+$-\frac u2\log e$ and $u\log e$. Hence
+\begin{equation}\label{eq:psilog}
+\frac{E_x}{\Inf_x}=\frac12\log e+\sum_bw_b\log r^2+O(m^3 4^{-m}).
+\end{equation}
+Next let $B=\{b:|z_b|\le m/4\}$. For $b\in B$ we use $\ln\binom nj=n\,h_e(j/n)-\frac12\ln\bigl(2\pi j(n-j)/n\bigr)
++O(1/n)$ for $\frac38\le j/n\le\frac58$, which follows from Robbins' form of Stirling's formula~\cite{Rob55}, where
+$h_e(\frac12+\zeta)=\ln2-2\zeta^2+O(\zeta^4)$ is the binary entropy in nats. With $\zeta=z_b/(2m)$ for both
+$\binom mb$ and $\binom{2m}{2b}$, and $\ln(1-4\zeta^2)=O(\zeta^2)$,
+\[
+\ln\binom mb=m\ln2-\frac{z_b^2}{2m}-\frac12\ln\frac{\pi m}2+\varepsilon_1,\qquad
+\ln\binom{2m}{2b}=2m\ln2-\frac{z_b^2}m-\frac12\ln(\pi m)+\varepsilon_2,
+\]
+and $\ln\binom{2m}m=2m\ln2-\frac12\ln(\pi m)+\varepsilon_3$, with
+$|\varepsilon_i|\le C(z_b^4/m^3+z_b^2/m^2+1/m)$. Therefore, for $b\in B$,
+\[
+\log r^2=2m-\log\frac{\pi m}2+\delta_b\log e+\varepsilon_b,\qquad|\varepsilon_b|\le C\Bigl(\frac{z_b^4}{m^3}
++\frac{z_b^2}{m^2}+\frac1m\Bigr).
+\]
+For $b\notin B$ both $\log r^2$ and $2m-\log\frac{\pi m}2+\delta_b\log e$ lie in $[-\log m,6m]$, because
+$1\le r\le\binom mb\binom{2m}m\le8^m$ and $\delta_b\le m$. If $s$ is binomial with parameters $2m$ and $\frac12$, then
+$w_b=\Pr[s=2b+1]$ and $z_b=s-1-m$, and for $m\ge4$ Hoeffding's inequality~\cite[Theorem~2]{Hoe63} gives
+$\sum_{b\notin B}w_b\le\Pr[|s-m|>\frac m4-1]\le2e^{-(m-4)^2/(16m)}$. Moreover $\E[(s-m)^4]=O(m^2)$, so $\sum_bw_b|\varepsilon_b|=O(1/m)$ over $b\in B$. Finally,
+$\sum_s(-1)^s\binom{2m}sp(s)=0$ for every polynomial $p$ of degree less than $2m$, so the odd and the even values of
+$s$ carry equal parts of $\E[(s-1-m)^2]=\frac m2+1$, and
+\[
+\sum_bw_b\delta_b=\frac1m\cdot\frac12\Bigl(\frac m2+1\Bigr)=\frac14+\frac1{2m}.
+\]
+Putting these together with $\sum_bw_b=\frac12$,
+\[
+\sum_bw_b\log r^2=\frac12\Bigl(2m-\log\frac{\pi m}2\Bigr)+\frac14\log e+O\Bigl(\frac1m\Bigr),
+\]
+and by~\eqref{eq:psilog} $E_x/\Inf_x=m-\frac12\log m+\frac34\log e-\frac12\log\frac\pi2+O(1/m)$.
 \end{proof}
 
 \begin{remark}
 The proof shows where the weight sits: $r=0$ exactly when $u+v$ is even, which is half of the weight, and on the other
-half $\log r^2$ is $2m-\log m+O(1)$ for typical $b$. A Gaussian approximation of the three binomial coefficients
-suggests $E_x/\Inf_x=m-\frac12\log m+c_0+o(1)$ with $c_0=\frac34\log e-\frac12\log\frac\pi2=0.7563\ldots$; the exact
-sum gives $E_x/\Inf_x-m+\frac12\log m=0.7565$ at $k=4001$ (Section~\ref{sec:num}). We have not proved the constant.
+half $\log r^2$ is $2m-\log m+O(1)$ for typical $b$. The constant $c_0$ collects three contributions: the
+Gaussian shape of the three binomial coefficients, which gives $-\frac12\log\frac\pi2$; their curvature, which makes
+$\log r^2$ grow by $\delta_b\log e$ away from the centre and contributes $\frac14\log e$; and the gap
+$\Psi(r)-\log r^2\to\log e$, which contributes $\frac12\log e$.
 \end{remark}
 
 \section{The tail on the unit circle}\label{sec:circle}
@@ -370,19 +413,22 @@ Lemma~\ref{lem:sum} reduces the ratio to $(m+1)^2$ terms whose ingredients are i
 of $P$; the code computes them exactly in integer arithmetic and evaluates each term of $\Phi$ as
 $p\log(1+q/p)$ with a $\log(1+\cdot)$ routine. For $t=1$ the values agree with those of~\cite{Shm9}, and for $t=0,1,2,3$
 at $k\le27$ with a rational-arithmetic implementation. The quotient of $E_x(F_{k,t})/\Inf_x(F_{k,t})$ by
-$(k-1)\log_2(1/P_t)$, with $P_2=\frac{11}{16}$ and $P_3=\frac{21}{32}$, is:
+$(k-1)\log_2(1/P_t)$, with $P_2=\frac{11}{16}$, $P_3=\frac{21}{32}$ and $P_4=\frac{163}{256}$, is:
 \begin{center}
 \begin{tabular}{rrrrrrrr}
 $k$ & $41$ & $81$ & $121$ & $161$ & $201$ & $251$ & $301$\\ \hline
 $t=2$ & $0.849$ & $0.899$ & $0.922$ & $0.936$ & $0.946$ & $0.954$ & $0.960$\\
 $t=3$ & $0.854$ & $0.902$ & $0.928$ & $0.941$ & $0.950$ & $0.958$ & $0.964$\\
+$t=4$ & $0.858$ & $0.909$ & $0.931$ & $0.944$ & $0.953$ & $0.960$ & $0.966$\\
 \end{tabular}
 \end{center}
 For $\tilde f_k$ the formula of Theorem~\ref{thm:half} agrees with the double sum at $k=13$, $41$, $81$ and $121$
 to six decimals, and the identity of Lemma~\ref{lem:kraw} was checked against direct expansion for
 $m\le11$. The quotient by $k-1$ is $0.466$, $0.476$, $0.482$, $0.490$, $0.496$ and $0.499$ at $k=41$, $81$, $121$,
 $301$, $1001$ and $4001$, and $E_x/\Inf_x-m+\frac12\log_2m$ is $0.7796$, $0.7677$, $0.7639$, $0.7593$, $0.7572$ and
-$0.7565$ at the same values of $k$.
+$0.7565$ at the same values of $k$. The difference from $c_0=0.75627$, multiplied by $m$, is $0.467$, $0.459$,
+$0.456$, $0.453$, $0.451$ and $0.4510$ at these $k$, and $0.4509$ at $k=8001$, in line with the error term $O(1/m)$
+of Theorem~\ref{thm:half}.
 
 \section*{Acknowledgements and funding}
 This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
@@ -425,6 +471,8 @@ Comput. Sci. 654 (2016), 92--112.
 124 (1996), 2993--3002.
 \bibitem{Han} X.~Han, A new bound for the Fourier-entropy-influence conjecture, Combinatorica 45 (2025), no.~1,
 Paper~4, arXiv:2312.08271.
+\bibitem{Hoe63} W.~Hoeffding, Probability inequalities for sums of bounded random variables, J. Amer. Statist. Assoc.
+58 (1963), 13--30.
 \bibitem{Hod} R.~Hod, Improved lower bounds for the Fourier entropy/influence conjecture via lexicographic functions,
 arXiv:1711.00762, 2017.
 \bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the Fourier-entropy
@@ -436,6 +484,7 @@ conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013.
 \bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
 Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
+\bibitem{Rob55} H.~Robbins, A remark on Stirling's formula, Amer. Math. Monthly 62 (1955), 26--29.
 \bibitem{VW08} S.~Verd\'u, T.~Weissman, The information lost in erasures, IEEE Trans. Inform. Theory 54 (2008),
 5030--5058.
 \bibitem{WWW} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols, and the Fourier entropy-influence conjecture, ITCS 2014,
