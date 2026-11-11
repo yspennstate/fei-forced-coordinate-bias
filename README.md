@@ -30,6 +30,14 @@ with c0 = (3/4) log2 e - (1/2) log2(pi/2) = 0.75627...,
 
 from an exact single-sum formula.
 
+Near P = 1/2 (Remark 9), with P = 1/2 + eps and 2^-m << eps << 1, a first-order expansion in eps gives
+
+    E_x/Inf_x = (k-1) log2(1/P) - log2(1/eps) - (1/2) log2 m + c(m),
+    c(m) = log2(2/pi) + ((3 - gamma)/2) log2 e + 2/sqrt(pi m) + O(1/m),
+
+with gamma Euler's constant (the limit is 1.096173...). The error terms are not proved; the exact double sum gives
+c = 1.3537 at k = 61 and 1.3139 at k = 81, against 1.353700 and 1.313931 from the first-order form.
+
 ## Code
 
 All programs are Python 3 with no other dependencies.
@@ -44,6 +52,11 @@ All programs are Python 3 with no other dependencies.
 * `code/c0_check.py` compares the single sum with m - (1/2) log2 m + c0 up to k = 8001. Output: `code/c0_check_out.txt`.
 * `code/rich.py` and `code/resid2.py` read that output and check the 1/m and 1/m^2 terms. Outputs:
   `code/rich_out.txt`, `code/resid2_out.txt`.
+* `code/eps_scan.py` evaluates the exact double sum for P = 1/2 + eps at k = 21, 41, 61, 81 (output
+  `code/eps_scan_out.txt`); `code/eps_c.py` subtracts (k-1) log2(1/P) - log2(1/eps) - (1/2) log2 m (output
+  `code/eps_c_out.txt`).
+* `code/eps_lin.py` evaluates c(m) in the first-order form of Remark 9 (output `code/eps_lin_out.txt`), and
+  `code/lattice_check.py` checks the constant 2 ln 2 for the odd lattice (output `code/lattice_check_out.txt`).
 
 ## Related papers
 

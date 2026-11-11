@@ -324,6 +324,36 @@ and $E_x/\Inf_x=\frac12\log e+\frac2{\ln2}\sum_bw_b\ln r+O(m^3 4^{-m})$ gives th
 being $\frac2{\ln 2}\cdot\frac5{32}=\frac5{16}\log e$.
 \end{proof}
 
+\begin{remark}\label{rem:near}
+Near $P=\frac12$ the two regimes meet. Write $P=\frac12+\varepsilon$. At $\varepsilon=0$,
+$\partial_\varepsilon H_{uv}=(v-u-1)(z-1)^{u+v+1}\bigl(\frac{1+z}2\bigr)^{2m-u-v}$, so the terms with $u+v=2b+1$ keep
+$r_{uv}=|\kappa_{2b}|+O(\varepsilon)$, while those with $u+v=2b\ge2$, which vanish at $\varepsilon=0$, have
+\[
+r_{uv}=2\varepsilon\bigl|(v-u-1)\kappa_{2b}+(-1)^v\bigr|+O(\varepsilon^2),
+\]
+where $v-u-1$ is odd, hence never $0$. When $\varepsilon$ is small and $\varepsilon2^m$ is large, all these $r_{uv}$ are
+large, $\Psi(r_{uv})=\log r_{uv}^2+\log e+o(1)$, and to first order the sum of Lemma~\ref{lem:sum} is
+$(k-1)\log\frac1P-\log\frac1\varepsilon-\frac12\log m+c(m)$ with $c(m)$ independent of $\varepsilon$; the leading term
+$(k-1)\log\frac1P$ differs from $2m$ by $O(m\varepsilon)$. The weight of the pairs with $u+v$ even is
+$\frac12-4^{-m}$, $v-u$ is close to normal with variance $\frac m2$ and nearly independent of $u+v$, and
+$\E\ln G^2=-\gamma-\ln2$ for a standard normal $G$, where $\gamma$ is Euler's constant. With the computation in the
+proof of Theorem~\ref{thm:half} for the factors $\kappa_{2b}$, this gives
+\[
+c(m)=\log\frac2\pi+\frac{3-\gamma}2\log e+\frac2{\sqrt{\pi m}}+O\Bigl(\frac1m\Bigr),\qquad
+\log\frac2\pi+\frac{3-\gamma}2\log e=1.096173\ldots,
+\]
+the term $2/\sqrt{\pi m}$ coming from the lattice of odd values of $v-u-1$: for even $N$ the sum of $\ln n^2$ over odd $n$ with
+$|n|<N$ exceeds $\frac12\int_{-N}^N\ln x^2\,dx$ by $2\ln2+o(1)$, and the density of $v-u$ at $0$ is about
+$1/\sqrt{\pi m}$. We have not made the error terms rigorous. Evaluated
+exactly in the first-order form, $c(m)$ is $1.423333$, $1.353700$, $1.313931$, $1.225405$ and $1.156825$ at $m=20$,
+$30$, $40$, $100$ and $400$, and $(c(m)-1.096173)\sqrt m$ is $1.463$, $1.411$, $1.377$, $1.292$ and $1.213$, approaching
+$2/\sqrt\pi=1.128$ at the rate $1/\sqrt m$. For the exact sum of Lemma~\ref{lem:sum} at $k=61$ and
+$\varepsilon=10^{-4}$, $2^{-15}$ and $10^{-6}$, the ratio minus $(k-1)\log\frac1P-\log\frac1\varepsilon-\frac12\log m$
+is $1.3540$, $1.3537$ and $1.3537$, against $c(30)=1.353700$, and at $k=81$ and $\varepsilon=10^{-4}$, $10^{-6}$
+and $2^{-20}$ it is $1.3142$, $1.3139$ and $1.3139$, against $c(40)=1.313931$. Once $\varepsilon2^m$ is of order $1$ the first-order form fails, and the ratio
+moves to the value of Theorem~\ref{thm:half}.
+\end{remark}
+
 \section{The tail on the unit circle}\label{sec:circle}
 
 From now on $P\in(\frac12,1)$. For $z=e^{\ii\theta}$ and $w=\cos\theta$,
