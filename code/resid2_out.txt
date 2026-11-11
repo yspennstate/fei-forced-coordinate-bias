@@ -1,0 +1,8 @@
+k=   41 m=   20  m^2*(offset - c0 - a1/m) = 0.3217
+k=   81 m=   40  m^2*(offset - c0 - a1/m) = 0.3106
+k=  121 m=   60  m^2*(offset - c0 - a1/m) = 0.3071
+k=  301 m=  150  m^2*(offset - c0 - a1/m) = 0.3031
+k= 1001 m=  500  m^2*(offset - c0 - a1/m) = 0.3013
+k= 2001 m= 1000  m^2*(offset - c0 - a1/m) = 0.3010
+k= 4001 m= 2000  m^2*(offset - c0 - a1/m) = 0.3007
+k= 8001 m= 4000  m^2*(offset - c0 - a1/m) = 0.3011

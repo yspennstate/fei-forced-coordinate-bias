@@ -287,6 +287,42 @@ $\log r^2$ grow by $\delta_b\log e$ away from the centre and contributes $\frac1
 $\Psi(r)-\log r^2\to\log e$, which contributes $\frac12\log e$.
 \end{remark}
 
+\begin{proposition}\label{prop:next}
+In the setting of Theorem~\ref{thm:half},
+\[
+\frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}=m-\frac12\log_2m+c_0+\frac{5\log_2e}{16\,m}+O\Bigl(\frac1{m^2}\Bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+By~\eqref{eq:psilog} and the tail bound in the proof of Theorem~\ref{thm:half}, it suffices to expand
+$\ln r$ for $|z_b|\le m/4$ and average. Stirling's series with its first correction,
+$\ln n!=n\ln n-n+\frac12\ln(2\pi n)+\frac1{12n}+O(n^{-3})$, gives for $\frac38\le j/n\le\frac58$
+\[
+\ln\binom nj=n\,h_e(j/n)-\frac12\ln\frac{2\pi j(n-j)}n+\frac1{12}\Bigl(\frac1n-\frac1j-\frac1{n-j}\Bigr)+O(n^{-3}).
+\]
+Apply this to $\binom mb$, $\binom{2m}m$ and $\binom{2m}{2b}$ with $\zeta=z_b/(2m)$ in the first and third. The
+entropy terms give $m\ln2-m\bigl(h_e(\frac12+\zeta)-\ln2\bigr)=m\ln2+2m\zeta^2+\frac43m\zeta^4+O(m\zeta^6)$, because
+$h_e(\frac12+\zeta)=\ln2-2\zeta^2-\frac43\zeta^4+O(\zeta^6)$. In the logarithmic terms the factors $1-4\zeta^2$ of
+$\binom mb$ and $\binom{2m}{2b}$ cancel, leaving $-\frac12\ln\frac{\pi m}2$. The brackets of the correction terms
+are $-\frac3m$, $-\frac3{2m}$ and $-\frac3{2m}$ up to $O(z_b^2/m^3)$; they enter with signs $+,+,-$, so together the
+corrections give $-\frac1{4m}$. Hence
+\[
+\ln r=m\ln2+\frac{z_b^2}{2m}+\frac{z_b^4}{12m^3}-\frac12\ln\frac{\pi m}2-\frac1{4m}
++O\Bigl(\frac{z_b^2}{m^3}+\frac{z_b^6}{m^5}+\frac1{m^3}\Bigr).
+\]
+With $s$ binomial with parameters $2m$ and $\frac12$ as before, the alternating-sum identity gives
+$\sum_bw_bz_b^2=\frac12\E[(s-1-m)^2]=\frac m4+\frac12$ and $\sum_bw_bz_b^4=\frac12\E[(s-1-m)^4]=\frac{3m^2}8+O(m)$, the
+latter because the central fourth moment of $s$ is $\frac{m(3m-1)}4$. The averages of the error terms are
+$O(1/m^2)$. Therefore
+\[
+\sum_bw_b\ln r=\frac m2\ln2-\frac14\ln\frac{\pi m}2+\frac18+\Bigl(\frac14+\frac1{32}-\frac18\Bigr)\frac1m
++O\Bigl(\frac1{m^2}\Bigr),
+\]
+and $E_x/\Inf_x=\frac12\log e+\frac2{\ln2}\sum_bw_b\ln r+O(m^3 4^{-m})$ gives the claim, the coefficient of $1/m$
+being $\frac2{\ln 2}\cdot\frac5{32}=\frac5{16}\log e$.
+\end{proof}
+
 \section{The tail on the unit circle}\label{sec:circle}
 
 From now on $P\in(\frac12,1)$. For $z=e^{\ii\theta}$ and $w=\cos\theta$,
@@ -428,7 +464,10 @@ $m\le11$. The quotient by $k-1$ is $0.466$, $0.476$, $0.482$, $0.490$, $0.496$ a
 $301$, $1001$ and $4001$, and $E_x/\Inf_x-m+\frac12\log_2m$ is $0.7796$, $0.7677$, $0.7639$, $0.7593$, $0.7572$ and
 $0.7565$ at the same values of $k$. The difference from $c_0=0.75627$, multiplied by $m$, is $0.467$, $0.459$,
 $0.456$, $0.453$, $0.451$ and $0.4510$ at these $k$, and $0.4509$ at $k=8001$, in line with the error term $O(1/m)$
-of Theorem~\ref{thm:half}.
+of Theorem~\ref{thm:half}. Extrapolating linearly in $1/m$ between consecutive values of $k$ from $1001$ to $8001$
+gives $0.450842$ each time, which is $\frac5{16}\log_2e$ to six places, as in Proposition~\ref{prop:next}. After that term
+is removed, the remainder multiplied by $m^2$ is $0.322$, $0.311$, $0.307$, $0.303$, $0.301$, $0.301$ and $0.301$ at
+$k=41,81,121,301,1001,2001,4001$.
 
 \section*{Acknowledgements and funding}
 This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math

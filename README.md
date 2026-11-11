@@ -24,7 +24,9 @@ More generally the same holds for the biased majority under every rational bias 
 relevant coefficients advances by arccos((2P-1)/(2P)), an irrational multiple of pi. At P = 1/2 the coefficients are
 Krawtchouk values at the middle of their range, half of them vanish, and
 
-    E_x/Inf_x = m - (1/2) log2 m + c0 + O(1/m),   c0 = (3/4) log2 e - (1/2) log2(pi/2) = 0.75627...,
+    E_x/Inf_x = m - (1/2) log2 m + c0 + (5/16) log2(e) / m + O(1/m^2),
+
+with c0 = (3/4) log2 e - (1/2) log2(pi/2) = 0.75627...,
 
 from an exact single-sum formula.
 
@@ -40,6 +42,8 @@ All programs are Python 3 with no other dependencies.
 * `code/kraw.py` checks the Krawtchouk identity of Lemma 6 for m <= 11, compares the single sum of Theorem 3 with the
   double sum, and evaluates it up to k = 4001. Output: `code/kraw_out.txt`.
 * `code/c0_check.py` compares the single sum with m - (1/2) log2 m + c0 up to k = 8001. Output: `code/c0_check_out.txt`.
+* `code/rich.py` and `code/resid2.py` read that output and check the 1/m and 1/m^2 terms. Outputs:
+  `code/rich_out.txt`, `code/resid2_out.txt`.
 
 ## Related papers
 
