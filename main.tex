@@ -45,7 +45,7 @@ $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and
 $C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ}, it is
 preserved under suitable compositions~\cite{OT13}, and weaker forms and bounds with extra factors are
 in~\cite{CKLS,WWW,KKLMS,Han}; the min-entropy version is known for read-$k$ DNFs with $k$
-fixed~\cite{Shalev,ACKSW}; lower bounds on the best constant are in~\cite{Hod}. The erasure entropy of $f$ at a
+fixed~\cite{Shalev,ACKSW}; lower bounds on the best constant are in~\cite{OT13,Hod,MI26a,MI26b,Num26}, the largest being $6.5218$~\cite{Num26}. The erasure entropy of $f$ at a
 coordinate $x$ is $E_x(f)=H(\mathbf 1[x\in U]\mid U\setminus\{x\})$, the conditional entropy of one coordinate given
 the others in the sense of Verd\'u and Weissman~\cite{VW08}, and with $\Inf_x(f)=\Pr[x\in U]$ the conjecture holds if
 and only if $\sup_f\min_{x:\Inf_x(f)>0}E_x(f)/\Inf_x(f)$ is finite~\cite{Shm1}, which builds on the
@@ -538,6 +538,9 @@ The paper is part of the Math Brain project, whose public repository is
 \begin{thebibliography}{99}
 \bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
 entropy and min-entropy, ACM Trans. Comput. Theory 13 (2021), no.~4, 1--40, doi:10.1145/3470860; arXiv:1809.09819.
+\bibitem{MI26a} Mosaic Intelligence, A certified lower bound $C_{71}\ge 6.4901128435233943$ for the Fourier entropy-influence constant, Zenodo, 2026, doi:10.5281/zenodo.20794146.
+\bibitem{MI26b} Mosaic Intelligence, A certified $n=17$ lower bound for the Fourier entropy-influence constant, Zenodo, 2026, doi:10.5281/zenodo.21113935.
+\bibitem{Num26} Numaro, Improved lower bound $C_{71}>6.521845710923046575$ for the Fourier entropy-influence constant ($n=18$ explicit construction), certificate archive, Zenodo, 2026, doi:10.5281/zenodo.21497769.
 \bibitem{Shalev} G.~Shalev, On the Fourier entropy influence conjecture for extremal classes, arXiv:1806.03646, 2018.
 \bibitem{Cha25} F.~Chang, A lower bound for the Fourier entropy of Boolean functions on the biased hypercube,
 arXiv:2511.07739, 2025.
