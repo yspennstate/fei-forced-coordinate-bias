@@ -25,17 +25,16 @@
 \begin{document}
 
 \begin{abstract}
-A monotone Boolean function $F_{k,t}$, built from a majority function on $k$ inputs with one hidden coordinate $x$ by
-substituting threshold functions of $2t$ fresh variables, has $x$ as the only variable lying both in a shortest
-minterm and in a shortest maxterm. The ratio $E_x/\Inf_x$ of the erasure entropy to the influence at $x$ was known to
-be unbounded when $k$ and $t$ grow together, and to grow linearly in $k$ for $t=1$. We show that for every fixed
-$t\ge1$ it equals $(1+o(1))\log_2(1/\Inf_x)=(1+o(1))(k-1)\log_2(1/P_t)$, where $P_t$ is the probability that a binomial
-variable with parameters $2t$ and $\frac12$ is at least $t$. More generally the same holds for the underlying majority
-function under every rational product bias $P\in(\frac12,1)$, the phase of the relevant coefficients advancing by
-$\arccos\frac{2P-1}{2P}$, an irrational multiple of $\pi$. At $P=\frac12$ that angle is $\frac\pi2$, and the behaviour
-changes: there the coefficients are values of Krawtchouk polynomials at the middle of their range, half of them
-vanish, and the ratio is $\frac12\log_2(1/\Inf_x)-\frac12\log_2\log_2(1/\Inf_x)+c_0+\frac12+O(1/\log_2(1/\Inf_x))$ with
-$c_0=\frac34\log_2e-\frac12\log_2\frac\pi2$, which we derive from an exact single-sum formula.
+The erasure entropy $E_x$ of a Boolean function at a coordinate $x$ is the conditional entropy of the event $x\in U$
+given $U\setminus\{x\}$, where $U$ is drawn from the spectral distribution. We study a monotone function $F_{k,t}$,
+built from a majority function on $k$ inputs with one hidden coordinate $x$ by substituting threshold functions of
+$2t$ fresh variables, in which $x$ is the only variable lying in both a shortest minterm and a shortest maxterm. For
+every fixed $t\ge1$ we show that $E_x/\Inf_x$ is asymptotic to $\log_2(1/\Inf_x)$, the largest value possible, and so
+grows linearly in $k$; this extends the case $t=1$. The same holds for the majority function under every rational
+product bias above one half, because the phase of the relevant coefficients advances by an irrational multiple of
+$\pi$. At bias one half the coefficients are values of Krawtchouk polynomials at the middle of their range, half of
+them vanish, and the ratio is only about half as large; an exact single-sum formula gives its expansion up to the
+constant term.
 \end{abstract}
 
 \subjclass[2020]{06E30, 42C10, 94A17}
