@@ -44,7 +44,8 @@ For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be
 $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
 $C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ}, it is
 preserved under suitable compositions~\cite{OT13}, and weaker forms and bounds with extra factors are
-in~\cite{CKLS,WWW,KKLMS,Han}; the min-entropy version is known for read-$k$ DNFs with $k$
+in~\cite{CKLS,WWW,KKLMS,Han}, and Li and Han~\cite{LH25} make the constant in front of $\E|U|$ in Han's bound
+sharp; the conjecture holds for every linear threshold function~\cite{ShmLTF}; the min-entropy version is known for read-$k$ DNFs with $k$
 fixed~\cite{Shalev,ACKSW}; lower bounds on the best constant are in~\cite{OT13,Hod,MI26a,MI26b,Num26}, the largest being $6.5218$~\cite{Num26}. The erasure entropy of $f$ at a
 coordinate $x$ is $E_x(f)=H(\mathbf 1[x\in U]\mid U\setminus\{x\})$, the conditional entropy of one coordinate given
 the others in the sense of Verd\'u and Weissman~\cite{VW08}, and with $\Inf_x(f)=\Pr[x\in U]$ the conjecture holds if
@@ -561,6 +562,8 @@ arXiv:1711.00762, 2017.
 conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
 \bibitem{KMS12} N.~Keller, E.~Mossel, T.~Schlank, A note on the entropy/influence conjecture, Discrete Math. 312
 (2012), 3364--3372, arXiv:1105.2651.
+\bibitem{LH25} P.~Li, G.~Han, Strengthening Han's Fourier entropy-influence inequality via an
+information-theoretic proof, arXiv:2512.03117, 2025.
 \bibitem{MS77} F.~J.~MacWilliams, N.~J.~A.~Sloane, \emph{The Theory of Error-Correcting Codes}, North-Holland, 1977.
 \bibitem{OD14} R.~O'Donnell, \emph{Analysis of Boolean Functions}, Cambridge University Press, 2014.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013,
@@ -581,6 +584,8 @@ America, 1956, Corollary~3.12.
 \url{https://github.com/yspennstate/fei-hidden-coordinates}, 2026.
 \bibitem{Shm9} Y.~Shmalo, A forced coordinate with nearly maximal erasure entropy,
 \url{https://github.com/yspennstate/fei-forced-coordinate}, 2026.
+\bibitem{ShmLTF} Y.~Shmalo, Fourier entropy of threshold functions and their compositions,
+arXiv:2610.16069, 2026.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
 \url{https://github.com/yspennstate/math-brain-public}.
 \bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research},
