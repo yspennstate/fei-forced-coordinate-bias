@@ -1,6 +1,7 @@
 \documentclass[11pt]{amsart}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[margin=1.1in]{geometry}
+\usepackage{array,longtable,booktabs}
 \usepackage{hyperref}
 \emergencystretch=2em
 
@@ -32,8 +33,8 @@ variable with parameters $2t$ and $\frac12$ is at least $t$. More generally the 
 function under every rational product bias $P\in(\frac12,1)$, the phase of the relevant coefficients advancing by
 $\arccos\frac{2P-1}{2P}$, an irrational multiple of $\pi$. At $P=\frac12$ that angle is $\frac\pi2$, and the behaviour
 changes: there the coefficients are values of Krawtchouk polynomials at the middle of their range, half of them
-vanish, and the ratio is $\frac12\log_2(1/\Inf_x)-\frac12\log_2\log_2(1/\Inf_x)+c+O(1/\log_2(1/\Inf_x))$ with
-$c=\frac12+\frac34\log_2e-\frac12\log_2\frac\pi2$, which we derive from an exact single-sum formula.
+vanish, and the ratio is $\frac12\log_2(1/\Inf_x)-\frac12\log_2\log_2(1/\Inf_x)+c_0+\frac12+O(1/\log_2(1/\Inf_x))$ with
+$c_0=\frac34\log_2e-\frac12\log_2\frac\pi2$, which we derive from an exact single-sum formula.
 \end{abstract}
 
 \subjclass[2020]{06E30, 42C10, 94A17}
@@ -41,11 +42,11 @@ $c=\frac12+\frac34\log_2e-\frac12\log_2\frac\pi2$, which we derive from an exact
 
 \maketitle
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
 For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ and let $U$ be a random subset with
 $\Pr[U=S]=\hat f(S)^2$. The Fourier entropy-influence conjecture of Friedgut and Kalai~\cite{FK96} asks for an absolute
-$C$ with $H(U)\le C\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ}, it is
+constant $C_{\mathrm{FEI}}$ with $H(U)\le C_{\mathrm{FEI}}\,\E|U|$. It is known for symmetric functions and read-once decision trees~\cite{OWZ}, it is
 preserved under suitable compositions~\cite{OT13}, and weaker forms and bounds with extra factors are
 in~\cite{CKLS,WWW,KKLMS,Han}, and Li and Han~\cite{LH25} make the constant in front of $\E|U|$ in Han's bound
 sharp; the conjecture holds for every linear threshold function~\cite{ShmLTF}; the min-entropy version is known for read-$k$ DNFs with $k$
@@ -63,7 +64,7 @@ for every $f$ and $x$ with $\Inf_x(f)>0$.
 The question is which coordinate to take. In~\cite{Shm8} several selection rules are shown to fail on monotone
 functions, among them the rule that takes, among the variables lying both in a shortest minterm and in a shortest
 maxterm, one of smallest ratio. Fix an odd $k=2m+1$, let $y^0\in\{0,1\}^k$ have $y^0_j=1$ for $j\le m$ and
-$y^0_j=0$ for $j>m$, let $y^1=y^0+e_{m+1}$, let $M$ be $\MAJ_k$ with the point $y^1$ removed from its true set, and
+$y^0_j=0$ for $j>m$, let $y^1$ differ from $y^0$ only in $y^1_{m+1}=1$, let $M$ be $\MAJ_k$ with the point $y^1$ removed from its true set, and
 \[
 \tilde f_k(y,x)=M(y)\vee\bigl(x\wedge[y\ge y^0]\bigr).
 \]
@@ -81,7 +82,7 @@ sum of coordinate-wise terms is in~\cite{Cha25}. For $t=1$, $P_1=\frac34$ and th
 $(1+o(1))(k-1)\log_2\frac43$~\cite{Shm9}. Here we treat every fixed $t\ge1$, and more generally every rational bias.
 
 For $P\in(0,1)$ write $E_x^P(\tilde f_k)$ and $\Inf_x^P(\tilde f_k)$ for the erasure entropy and the influence of $x$
-for the law $c(S)^2$, where $c(S)$ are the coefficients of $\tilde f_k$, in $\pm1$ values, in the orthonormal basis of
+for the law that gives each set $S$ the square of the coefficient of $\tilde f_k$ at $S$, in $\pm1$ values, in the orthonormal basis of
 the product measure with $\Pr[y_j=1]=P$ for $j\le m$, $\Pr[y_j=1]=1-P$ for $j>m$, and $x$ uniform. At $P=\frac12$
 these are $E_x(\tilde f_k)$ and $\Inf_x(\tilde f_k)$. Let $\alpha_P=\arccos\frac{2P-1}{2P}$.
 
@@ -116,9 +117,9 @@ Let $k=2m+1$. Then $\Inf_x(\tilde f_k)=2^{-2m}$ and
 Moreover $\bigl|E_x(\tilde f_k)/\Inf_x(\tilde f_k)-m+\frac12\log_2m\bigr|\le C$ for an absolute constant $C$, and
 \[
 \frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}=m-\frac12\log_2m+c_0+O\Bigl(\frac1m\Bigr),\qquad
-c_0=\frac34\log_2e-\frac12\log_2\frac\pi2=0.75627\ldots,
+c_0=\frac34\log_2e-\frac12\log_2\frac\pi2=0.75627\dots,
 \]
-so that, with $L=\log_2(1/\Inf_x(\tilde f_k))=2m$, the ratio is $\frac12L-\frac12\log_2L+c_0+\frac12+O(1/L)$.
+so that, as $\log_2(1/\Inf_x(\tilde f_k))=2m$, the ratio is $\frac12\log_2\frac1{\Inf_x}-\frac12\log_2\log_2\frac1{\Inf_x}+c_0+\frac12+O(1/m)$.
 \end{theorem}
 
 In~\cite[Proposition~11]{Shm8} the ratio of $\tilde f_k$ was shown to be at least $(\frac18-o(1))(k-1)$; the
@@ -130,12 +131,12 @@ $\tilde f_k$~\cite[Proposition~12]{Shm8}, while for each fixed $t$ the ratio is 
 
 \section{The ratio as a double sum}\label{sec:sum}
 
-All logarithms are to base $2$ unless written $\ln$. For $p,q\ge0$ let $\Phi(p,q)=p\log\frac{p+q}{p}+q\log\frac{p+q}{q}$,
-with $\Phi(p,0)=\Phi(0,q)=0$, so that $\Psi(r)=\Phi(r^2,1)$. Then $\Psi\ge0$, $\Psi(r)\ge\log r^2$ for $r\ge1$, and
+All logarithms are to base $2$ unless written $\ln$. For $a,b\ge0$ let $\Phi(a,b)=a\log\frac{a+b}{a}+b\log\frac{a+b}{b}$,
+with $\Phi(a,0)=\Phi(0,b)=0$, so that $\Psi(r)=\Phi(r^2,1)$. Then $\Psi\ge0$, $\Psi(r)\ge\log r^2$ for $r\ge1$, and
 $\Psi(r)\le\log r^2+1+\log e$ for $r\ge1$.
 
 Fix $P\in[\frac12,1)$ and put $q=1-P$ and $\sigma=\sqrt{Pq}$. In the basis $\prod_{j\in S}\phi_j(y_j)$, with
-$\phi_j(y)=(y-\mu_j)/\sigma$, $\mu_j=P$ for $j\le m$ and $\mu_j=q$ for $j>m$, and with $+1$ for true,
+$\phi_j(y_j)=(y_j-\mu_j)/\sigma$, $\mu_j=P$ for $j\le m$ and $\mu_j=q$ for $j>m$, and with $+1$ for true,
 $\tilde f_k=\bar A+(2x-1)D$, where
 \[
 D=\mathbf 1[y=y^0]+\mathbf 1[y=y^1],\qquad \bar A=2N-1+\mathbf 1[y=y^0]-\mathbf 1[y=y^1],\qquad
@@ -144,28 +145,28 @@ N=\mathbf 1[|y|\ge m+1].
 For $S\subseteq[k]$ let $u=|S\cap\{1,\dots,m\}|$ and $v=|S\cap\{m+2,\dots,k\}|$, and put
 \begin{gather*}
 X(z)=q+Pz,\qquad Y(z)=P+qz,\\
-H_{uv}(z)=(z-1)^{u+v}X(z)^{m-u}Y(z)^{m+1-v},\qquad t_{uv}=\sum_{c\ge m+1}[z^c]H_{uv}(z).
+\Pi_{uv}(z)=(z-1)^{u+v}X(z)^{m-u}Y(z)^{m+1-v},\qquad \tau_{uv}=\sum_{\nu\ge m+1}[z^\nu]\Pi_{uv}(z).
 \end{gather*}
 
 \begin{lemma}\label{lem:coef}
 If $m+1\in S$ then $\hat D(S)=0$. If $m+1\notin S$ then $\hat D(S)=(-1)^v\sigma^{u+v}P^{2m-u-v}$ and
-$\hat{\bar A}(S)=2\sigma^{u+v}t_{uv}-\mathbf 1[S=\emptyset]+(P-q)\hat D(S)$.
+$\hat{\bar A}(S)=2\sigma^{u+v}\tau_{uv}-\mathbf 1[S=\emptyset]+(P-q)\hat D(S)$.
 \end{lemma}
 
 \begin{proof}
-This is~\cite[Lemma~1]{Shm9} with $P$ in place of $\frac34$. For a point $w$,
-$\widehat{\mathbf 1[y=w]}(S)=\Pr[y=w]\prod_{j\in S}\phi_j(w_j)$, and $\Pr[y=y^0]=P^{2m+1}$, $\Pr[y=y^1]=P^{2m}q$. If
+This is~\cite[Lemma~1]{Shm9} with $P$ in place of $\frac34$. For a point $y'$,
+$\widehat{\mathbf 1[y=y']}(S)=\Pr[y=y']\prod_{j\in S}\phi_j(y'_j)$, and $\Pr[y=y^0]=P^{2m+1}$, $\Pr[y=y^1]=P^{2m}q$. If
 $m+1\in S$ the two terms of $\hat D(S)$ are $P^{2m+1}\phi_{m+1}(0)=-P^{2m}\sigma$ and $P^{2m}q\,\phi_{m+1}(1)=P^{2m}\sigma$
 times the same product, and cancel. Otherwise both points give the product $(-1)^v(q/P)^{(u+v)/2}$, since
 $\phi_j(1)=\sqrt{q/P}$ for $j\le m$ and $\phi_j(0)=-\sqrt{q/P}$ for $j\ge m+2$; this gives $\hat D(S)$, and the
 difference of the two indicators has coefficient $(P-q)\hat D(S)$. Finally $\E[z^{y_j}\phi_j(y_j)]=\sigma(z-1)$ and
-$\E[z^{y_j}]=1-\mu_j+\mu_jz$, so $\E[z^{|y|}\prod_{j\in S}\phi_j(y_j)]=\sigma^{u+v}H_{uv}(z)$ when $m+1\notin S$, and
-$\hat N(S)$ is the sum of its coefficients at $z^c$, $c\ge m+1$.
+$\E[z^{y_j}]=1-\mu_j+\mu_jz$, so $\E[z^{|y|}\prod_{j\in S}\phi_j(y_j)]=\sigma^{u+v}\Pi_{uv}(z)$ when $m+1\notin S$, and
+$\hat N(S)$ is the sum of its coefficients at $z^\nu$, $\nu\ge m+1$.
 \end{proof}
 
 Let $\beta_u=\binom mu q^uP^{m-u}$ and, for $0\le u,v\le m$,
 \[
-r_{uv}=\frac{\bigl|2t_{uv}-\mathbf 1[u=v=0]+(P-q)(-1)^vP^{2m-u-v}\bigr|}{P^{2m-u-v}}.
+r_{uv}=\frac{\bigl|2\tau_{uv}-\mathbf 1[u=v=0]+(P-q)(-1)^vP^{2m-u-v}\bigr|}{P^{2m-u-v}}.
 \]
 
 \begin{lemma}\label{lem:sum}
@@ -179,8 +180,8 @@ $\sum_{u,v}\binom mu\binom mv(Pq)^{u+v}P^{2(2m-u-v)}=(Pq+P^2)^{2m}=P^{2m}$, and
 $\Phi(\hat{\bar A}^2,\hat D^2)=\hat D^2\Psi(|\hat{\bar A}|/|\hat D|)$ with $|\hat{\bar A}(S)|/|\hat D(S)|=r_{uv}$.
 \end{proof}
 
-If $u+v\ge1$ then $Q_{uv}=H_{uv}/(z-1)$ is a polynomial and $t_{uv}=[z^m]Q_{uv}$: writing $Q_{uv}=\sum_cg_cz^c$, the
-sum $\sum_{c\ge m+1}(g_{c-1}-g_c)$ telescopes to $g_m$~\cite[Lemma~3]{Shm9}.
+If $u+v\ge1$ then $Q_{uv}=\Pi_{uv}/(z-1)$ is a polynomial and $\tau_{uv}=[z^m]Q_{uv}$, since $[z^\nu]\Pi_{uv}=[z^{\nu-1}]Q_{uv}-[z^\nu]Q_{uv}$ and the
+sum over $\nu\ge m+1$ telescopes~\cite[Lemma~3]{Shm9}.
 
 \section{The unbiased case}\label{sec:half}
 
@@ -196,92 +197,92 @@ $\kappa_a=0$ for odd $a$, and $\kappa_{2b}=(-1)^b\binom mb\binom{2m}m\big/\binom
 \end{lemma}
 
 \begin{proof}
-For a variable $s$,
+For a variable $\xi$,
 \[
-\sum_{a=0}^{2m}\binom{2m}a\kappa_as^a=[z^m]\bigl((1+z)+s(1-z)\bigr)^{2m}=[z^m]\bigl((1+s)+(1-s)z\bigr)^{2m}
-=\binom{2m}m(1-s^2)^m .
+\sum_{a=0}^{2m}\binom{2m}a\kappa_a\xi^a=[z^m]\bigl((1+z)+\xi(1-z)\bigr)^{2m}=[z^m]\bigl((1+\xi)+(1-\xi)z\bigr)^{2m}
+=\binom{2m}m(1-\xi^2)^m .
 \]
-Comparing coefficients of $s^a$ gives the claim.
+Comparing coefficients of $\xi^a$ gives the claim.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:half}]
 By Lemma~\ref{lem:sum}, $\Inf_x=2^{-2m}$. For $u+v\ge1$ put $a=u+v-1$; then
 \[
-\frac{2t_{uv}}{P^{2m-u-v}}=2^{2m-u-v+1}\,[z^m](z-1)^a\Bigl(\frac{1+z}2\Bigr)^{2m-a}=(-1)^a\kappa_a ,
+\frac{2\tau_{uv}}{P^{2m-u-v}}=2^{2m-u-v+1}\,[z^m](z-1)^a\Bigl(\frac{1+z}2\Bigr)^{2m-a}=(-1)^a\kappa_a ,
 \]
-so $r_{uv}=|\kappa_{u+v-1}|$. For $u=v=0$, $t_{00}=\Pr[|y|\ge m+1]=\frac12$ and $r_{00}=0$. The weight of the pairs
+so $r_{uv}=|\kappa_{u+v-1}|$. For $u=v=0$, $\tau_{00}=\Pr[|y|\ge m+1]=\frac12$ and $r_{00}=0$. The weight of the pairs
 with $u+v=s$ is $\sum_{u+v=s}\beta_u\beta_v=\binom{2m}s4^{-m}$, and by Lemma~\ref{lem:kraw} only odd $s=2b+1$ give
 $r\ne0$, with $r=\binom mb\binom{2m}m/\binom{2m}{2b}$. This is the formula. Since $\binom{2m}{2b}\le\binom{2m}m$, these
 values satisfy $r\ge\binom mb\ge1$.
 
-For the asymptotics write $w_b=\binom{2m}{2b+1}4^{-m}$ and $\delta_b=(2b-m)^2/m$. The odd binomial coefficients of
-order $2m$ sum to $2^{2m-1}$, so $\sum_bw_b=\frac12$, and if $s$ is binomial with parameters $2m$ and $\frac12$ then
-$\sum_bw_b\delta_b\le\E[(s-1-m)^2]/m=\frac12+\frac1m$. We use $h(p)\ge4p(1-p)=1-(2p-1)^2$ for the binary entropy $h$
+For the asymptotics write $p_b=\binom{2m}{2b+1}4^{-m}$ and $\delta_b=(2b-m)^2/m$. The odd binomial coefficients of
+order $2m$ sum to $2^{2m-1}$, so $\sum_bp_b=\frac12$, and if $s$ is binomial with parameters $2m$ and $\frac12$ then
+$\sum_bp_b\delta_b\le\E[(s-1-m)^2]/m=\frac12+\frac1m$. We use $h_2(\frac12+\zeta)\ge1-4\zeta^2$, $|\zeta|\le\frac12$, for the binary entropy $h_2$
 and, for $1\le j\le n-1$,
 \begin{equation}\label{eq:binom}
-\frac{2^{nh(j/n)}}{\sqrt{8j(n-j)/n}}\le\binom nj\le\frac{2^{nh(j/n)}}{\sqrt{2\pi j(n-j)/n}}
+\frac{2^{nh_2(j/n)}}{\sqrt{8j(n-j)/n}}\le\binom nj\le\frac{2^{nh_2(j/n)}}{\sqrt{2\pi j(n-j)/n}}
 \end{equation}
 \cite[Chapter~10, Lemma~7]{MS77}, together with $\binom{2m}m\le4^m/\sqrt{\pi m}$.
 
-Lower bound. By~\eqref{eq:binom} with $n=m$ and $8b(m-b)/m\le2m$, $\log\binom mb\ge m\,h(b/m)-\frac12\log(2m)\ge
+Lower bound. By~\eqref{eq:binom} with $n=m$ and $8b(m-b)/m\le2m$, $\log\binom mb\ge m\,h_2(b/m)-\frac12\log(2m)\ge
 m-\delta_b-\frac12\log m-\frac12$ for $1\le b\le m-1$, and this also holds for $b=0$. As $\Psi(r)\ge\log r^2$,
 \[
-\frac{E_x}{\Inf_x}\ge2\sum_bw_b\log\binom mb\ge m-\tfrac12\log m-\tfrac32-\tfrac2m .
+\frac{E_x}{\Inf_x}\ge2\sum_bp_b\log\binom mb\ge m-\tfrac12\log m-\tfrac32-\tfrac2m .
 \]
 
 Upper bound. For $1\le b\le m-1$, \eqref{eq:binom} applied to $\binom mb$ from above and to $\binom{2m}{2b}$ from below
 gives
 \begin{align*}
 \log r=\log\binom mb+\log\binom{2m}m-\log\binom{2m}{2b}
-&\le 2m-m\,h(b/m)-\tfrac12\log m+\tfrac32-\log\pi\\
+&\le 2m-m\,h_2(b/m)-\tfrac12\log m+\tfrac32-\log\pi\\
 &\le m+\delta_b-\tfrac12\log m+1 ,
 \end{align*}
-the factors $b(m-b)/m$ cancelling. For $b=0$, $r=\binom{2m}m\le4^m$ and $w_0=2m4^{-m}$. With
+the factors $b(m-b)/m$ cancelling. For $b=0$, $r=\binom{2m}m\le4^m$ and $p_0=2m4^{-m}$. With
 $\Psi(r)\le\log r^2+1+\log e$,
 \[
-\frac{E_x}{\Inf_x}\le\sum_{b\ge1}w_b\bigl(2m+2\delta_b-\log m+3+\log e\bigr)+w_0(4m+3)
+\frac{E_x}{\Inf_x}\le\sum_{b\ge1}p_b\bigl(2m+2\delta_b-\log m+3+\log e\bigr)+p_0(4m+3)
 \le m-\tfrac12\log m+C .
 \]
 Finally $\log_2(1/\Inf_x)=2m$, and $\frac12\log m=\frac12\log(2m)-\frac12$.
 
-The constant. Let $m\ge2$, write $z_b=2b-m$, so that $\delta_b=z_b^2/m$, and let $C$ denote absolute constants.
-First, $r$ is large for every $b$: since $i\mapsto\binom mi$ is log-concave, each term of
-$\binom{2m}{2b}=\sum_i\binom mi\binom m{2b-i}$ is at most $\binom mb^2$, so $\binom{2m}{2b}\le(m+1)\binom mb^2$ and,
+The constant. Let $m\ge2$, write $d_b=2b-m$, so that $\delta_b=d_b^2/m$, and let $C$ denote absolute constants.
+First, $r$ is large for every $b$: since $j\mapsto\binom mj$ is log-concave, each term of
+$\binom{2m}{2b}=\sum_j\binom mj\binom m{2b-j}$ is at most $\binom mb^2$, so $\binom{2m}{2b}\le(m+1)\binom mb^2$ and,
 with $\binom{2m}m\ge4^m/(2\sqrt m)$ and $\binom mb\le2^m$,
 \[
 r=\binom mb\binom{2m}m\Big/\binom{2m}{2b}\ge\frac{\binom{2m}m}{(m+1)\binom mb}\ge\frac{2^m}{2(m+1)\sqrt m}.
 \]
-For $r\ge1$ and $u=r^{-2}$, $\Psi(r)-\log r^2-\log e=\log e\,\bigl(\frac{\ln(1+u)}u-1+\ln(1+u)\bigr)$ lies between
-$-\frac u2\log e$ and $u\log e$. Hence
+For $r\ge1$, $\Psi(r)-\log r^2-\log e=\log e\,\bigl(r^2\ln(1+r^{-2})-1+\ln(1+r^{-2})\bigr)$ lies between
+$-\frac12r^{-2}\log e$ and $r^{-2}\log e$. Hence
 \begin{equation}\label{eq:psilog}
-\frac{E_x}{\Inf_x}=\frac12\log e+\sum_bw_b\log r^2+O(m^3 4^{-m}).
+\frac{E_x}{\Inf_x}=\frac12\log e+\sum_bp_b\log r^2+O(m^3 4^{-m}).
 \end{equation}
-Next let $B=\{b:|z_b|\le m/4\}$. For $b\in B$ we use $\ln\binom nj=n\,h_e(j/n)-\frac12\ln\bigl(2\pi j(n-j)/n\bigr)
+Next let $B=\{b:|d_b|\le m/4\}$. For $b\in B$ we use $\ln\binom nj=n\,h_e(j/n)-\frac12\ln\bigl(2\pi j(n-j)/n\bigr)
 +O(1/n)$ for $\frac38\le j/n\le\frac58$, which follows from Robbins' form of Stirling's formula~\cite{Rob55}, where
-$h_e(\frac12+\zeta)=\ln2-2\zeta^2+O(\zeta^4)$ is the binary entropy in nats. With $\zeta=z_b/(2m)$ for both
+$h_e(\frac12+\zeta)=\ln2-2\zeta^2+O(\zeta^4)$ is the binary entropy in nats. With $\zeta=d_b/(2m)$ for both
 $\binom mb$ and $\binom{2m}{2b}$, and $\ln(1-4\zeta^2)=O(\zeta^2)$,
 \[
-\ln\binom mb=m\ln2-\frac{z_b^2}{2m}-\frac12\ln\frac{\pi m}2+\varepsilon_1,\qquad
-\ln\binom{2m}{2b}=2m\ln2-\frac{z_b^2}m-\frac12\ln(\pi m)+\varepsilon_2,
+\ln\binom mb=m\ln2-\frac{d_b^2}{2m}-\frac12\ln\frac{\pi m}2+\Delta_1,\qquad
+\ln\binom{2m}{2b}=2m\ln2-\frac{d_b^2}m-\frac12\ln(\pi m)+\Delta_2,
 \]
-and $\ln\binom{2m}m=2m\ln2-\frac12\ln(\pi m)+\varepsilon_3$, with
-$|\varepsilon_i|\le C(z_b^4/m^3+z_b^2/m^2+1/m)$. Therefore, for $b\in B$,
+and $\ln\binom{2m}m=2m\ln2-\frac12\ln(\pi m)+\Delta_3$, with
+$|\Delta_i|\le C(d_b^4/m^3+d_b^2/m^2+1/m)$. Therefore, for $b\in B$,
 \[
-\log r^2=2m-\log\frac{\pi m}2+\delta_b\log e+\varepsilon_b,\qquad|\varepsilon_b|\le C\Bigl(\frac{z_b^4}{m^3}
-+\frac{z_b^2}{m^2}+\frac1m\Bigr).
+\log r^2=2m-\log\frac{\pi m}2+\delta_b\log e+\Delta_b,\qquad|\Delta_b|\le C\Bigl(\frac{d_b^4}{m^3}
++\frac{d_b^2}{m^2}+\frac1m\Bigr).
 \]
 For $b\notin B$ both $\log r^2$ and $2m-\log\frac{\pi m}2+\delta_b\log e$ lie in $[-\log m,6m]$, because
 $1\le r\le\binom mb\binom{2m}m\le8^m$ and $\delta_b\le m$. If $s$ is binomial with parameters $2m$ and $\frac12$, then
-$w_b=\Pr[s=2b+1]$ and $z_b=s-1-m$, and for $m\ge4$ Hoeffding's inequality~\cite[Theorem~2]{Hoe63} gives
-$\sum_{b\notin B}w_b\le\Pr[|s-m|>\frac m4-1]\le2e^{-(m-4)^2/(16m)}$. Moreover $\E[(s-m)^4]=O(m^2)$, so $\sum_bw_b|\varepsilon_b|=O(1/m)$ over $b\in B$. Finally,
-$\sum_s(-1)^s\binom{2m}sp(s)=0$ for every polynomial $p$ of degree less than $2m$, so the odd and the even values of
+$p_b=\Pr[s=2b+1]$ and $d_b=s-1-m$, and for $m\ge4$ Hoeffding's inequality~\cite[Theorem~2]{Hoe63} gives
+$\sum_{b\notin B}p_b\le\Pr[|s-m|>\frac m4-1]\le2e^{-(m-4)^2/(16m)}$. Moreover $\E[(s-m)^4]=O(m^2)$, so $\sum_bp_b|\Delta_b|=O(1/m)$ over $b\in B$. Finally,
+$\sum_s(-1)^s\binom{2m}ss^j=0$ for $0\le j<2m$, so the odd and the even values of
 $s$ carry equal parts of $\E[(s-1-m)^2]=\frac m2+1$, and
 \[
-\sum_bw_b\delta_b=\frac1m\cdot\frac12\Bigl(\frac m2+1\Bigr)=\frac14+\frac1{2m}.
+\sum_bp_b\delta_b=\frac1m\cdot\frac12\Bigl(\frac m2+1\Bigr)=\frac14+\frac1{2m}.
 \]
-Putting these together with $\sum_bw_b=\frac12$,
+Putting these together with $\sum_bp_b=\frac12$,
 \[
-\sum_bw_b\log r^2=\frac12\Bigl(2m-\log\frac{\pi m}2\Bigr)+\frac14\log e+O\Bigl(\frac1m\Bigr),
+\sum_bp_b\log r^2=\frac12\Bigl(2m-\log\frac{\pi m}2\Bigr)+\frac14\log e+O\Bigl(\frac1m\Bigr),
 \]
 and by~\eqref{eq:psilog} $E_x/\Inf_x=m-\frac12\log m+\frac34\log e-\frac12\log\frac\pi2+O(1/m)$.
 \end{proof}
@@ -303,60 +304,60 @@ In the setting of Theorem~\ref{thm:half},
 
 \begin{proof}
 By~\eqref{eq:psilog} and the tail bound in the proof of Theorem~\ref{thm:half}, it suffices to expand
-$\ln r$ for $|z_b|\le m/4$ and average. Stirling's series with its first correction,
+$\ln r$ for $|d_b|\le m/4$ and average. Stirling's series with its first correction,
 $\ln n!=n\ln n-n+\frac12\ln(2\pi n)+\frac1{12n}+O(n^{-3})$, gives for $\frac38\le j/n\le\frac58$
 \[
 \ln\binom nj=n\,h_e(j/n)-\frac12\ln\frac{2\pi j(n-j)}n+\frac1{12}\Bigl(\frac1n-\frac1j-\frac1{n-j}\Bigr)+O(n^{-3}).
 \]
-Apply this to $\binom mb$, $\binom{2m}m$ and $\binom{2m}{2b}$ with $\zeta=z_b/(2m)$ in the first and third. The
+Apply this to $\binom mb$, $\binom{2m}m$ and $\binom{2m}{2b}$ with $\zeta=d_b/(2m)$ in the first and third. The
 entropy terms give $m\ln2-m\bigl(h_e(\frac12+\zeta)-\ln2\bigr)=m\ln2+2m\zeta^2+\frac43m\zeta^4+O(m\zeta^6)$, because
 $h_e(\frac12+\zeta)=\ln2-2\zeta^2-\frac43\zeta^4+O(\zeta^6)$. In the logarithmic terms the factors $1-4\zeta^2$ of
 $\binom mb$ and $\binom{2m}{2b}$ cancel, leaving $-\frac12\ln\frac{\pi m}2$. The brackets of the correction terms
-are $-\frac3m$, $-\frac3{2m}$ and $-\frac3{2m}$ up to $O(z_b^2/m^3)$; they enter with signs $+,+,-$, so together the
+are $-\frac3m$, $-\frac3{2m}$ and $-\frac3{2m}$ up to $O(d_b^2/m^3)$; they enter with signs $+,+,-$, so together the
 corrections give $-\frac1{4m}$. Hence
 \[
-\ln r=m\ln2+\frac{z_b^2}{2m}+\frac{z_b^4}{12m^3}-\frac12\ln\frac{\pi m}2-\frac1{4m}
-+O\Bigl(\frac{z_b^2}{m^3}+\frac{z_b^6}{m^5}+\frac1{m^3}\Bigr).
+\ln r=m\ln2+\frac{d_b^2}{2m}+\frac{d_b^4}{12m^3}-\frac12\ln\frac{\pi m}2-\frac1{4m}
++O\Bigl(\frac{d_b^2}{m^3}+\frac{d_b^6}{m^5}+\frac1{m^3}\Bigr).
 \]
 With $s$ binomial with parameters $2m$ and $\frac12$ as before, the alternating-sum identity gives
-$\sum_bw_bz_b^2=\frac12\E[(s-1-m)^2]=\frac m4+\frac12$ and $\sum_bw_bz_b^4=\frac12\E[(s-1-m)^4]=\frac{3m^2}8+O(m)$, the
+$\sum_bp_bd_b^2=\frac12\E[(s-1-m)^2]=\frac m4+\frac12$ and $\sum_bp_bd_b^4=\frac12\E[(s-1-m)^4]=\frac{3m^2}8+O(m)$, the
 latter because the central fourth moment of $s$ is $\frac{m(3m-1)}4$. The averages of the error terms are
 $O(1/m^2)$. Therefore
 \[
-\sum_bw_b\ln r=\frac m2\ln2-\frac14\ln\frac{\pi m}2+\frac18+\Bigl(\frac14+\frac1{32}-\frac18\Bigr)\frac1m
+\sum_bp_b\ln r=\frac m2\ln2-\frac14\ln\frac{\pi m}2+\frac18+\Bigl(\frac14+\frac1{32}-\frac18\Bigr)\frac1m
 +O\Bigl(\frac1{m^2}\Bigr),
 \]
-and $E_x/\Inf_x=\frac12\log e+\frac2{\ln2}\sum_bw_b\ln r+O(m^3 4^{-m})$ gives the claim, the coefficient of $1/m$
+and $E_x/\Inf_x=\frac12\log e+\frac2{\ln2}\sum_bp_b\ln r+O(m^3 4^{-m})$ gives the claim, the coefficient of $1/m$
 being $\frac2{\ln 2}\cdot\frac5{32}=\frac5{16}\log e$.
 \end{proof}
 
 \begin{remark}\label{rem:near}
-Near $P=\frac12$ the two regimes meet. Write $P=\frac12+\varepsilon$. At $\varepsilon=0$,
-$\partial_\varepsilon H_{uv}=(v-u-1)(z-1)^{u+v+1}\bigl(\frac{1+z}2\bigr)^{2m-u-v}$, so the terms with $u+v=2b+1$ keep
-$r_{uv}=|\kappa_{2b}|+O(\varepsilon)$, while those with $u+v=2b\ge2$, which vanish at $\varepsilon=0$, have
+Near $P=\frac12$ the two regimes meet. Write $P=\frac12+\eta$. At $\eta=0$,
+$\partial_\eta \Pi_{uv}=(v-u-1)(z-1)^{u+v+1}\bigl(\frac{1+z}2\bigr)^{2m-u-v}$, so the terms with $u+v=2b+1$ keep
+$r_{uv}=|\kappa_{2b}|+O(\eta)$, while those with $u+v=2b\ge2$, which vanish at $\eta=0$, have
 \[
-r_{uv}=2\varepsilon\bigl|(v-u-1)\kappa_{2b}+(-1)^v\bigr|+O(\varepsilon^2),
+r_{uv}=2\eta\bigl|(v-u-1)\kappa_{2b}+(-1)^v\bigr|+O(\eta^2),
 \]
-where $v-u-1$ is odd, hence never $0$. When $\varepsilon$ is small and $\varepsilon2^m$ is large, all these $r_{uv}$ are
+where $v-u-1$ is odd, hence never $0$. When $\eta$ is small and $\eta2^m$ is large, all these $r_{uv}$ are
 large, $\Psi(r_{uv})=\log r_{uv}^2+\log e+o(1)$, and to first order the sum of Lemma~\ref{lem:sum} is
-$(k-1)\log\frac1P-\log\frac1\varepsilon-\frac12\log m+c(m)$ with $c(m)$ independent of $\varepsilon$; the leading term
-$(k-1)\log\frac1P$ differs from $2m$ by $O(m\varepsilon)$. The weight of the pairs with $u+v$ even is
+$(k-1)\log\frac1P-\log\frac1\eta-\frac12\log m+c_1(m)$ with $c_1(m)$ independent of $\eta$; the leading term
+$(k-1)\log\frac1P$ differs from $2m$ by $O(m\eta)$. The weight of the pairs with $u+v$ even is
 $\frac12-4^{-m}$, $v-u$ is close to normal with variance $\frac m2$ and nearly independent of $u+v$, and
-$\E\ln G^2=-\gamma-\ln2$ for a standard normal $G$, where $\gamma$ is Euler's constant. With the computation in the
+$\E\ln Z^2=-\gamma-\ln2$ for a standard normal $Z$, where $\gamma$ is Euler's constant. With the computation in the
 proof of Theorem~\ref{thm:half} for the factors $\kappa_{2b}$, this gives
 \[
-c(m)=\log\frac2\pi+\frac{3-\gamma}2\log e+\frac2{\sqrt{\pi m}}+O\Bigl(\frac1m\Bigr),\qquad
-\log\frac2\pi+\frac{3-\gamma}2\log e=1.096173\ldots,
+c_1(m)=\log\frac2\pi+\frac{3-\gamma}2\log e+\frac2{\sqrt{\pi m}}+O\Bigl(\frac1m\Bigr),\qquad
+\log\frac2\pi+\frac{3-\gamma}2\log e=1.096173\dots,
 \]
-the term $2/\sqrt{\pi m}$ coming from the lattice of odd values of $v-u-1$: for even $N$ the sum of $\ln n^2$ over odd $n$ with
-$|n|<N$ exceeds $\frac12\int_{-N}^N\ln x^2\,dx$ by $2\ln2+o(1)$, and the density of $v-u$ at $0$ is about
+the term $2/\sqrt{\pi m}$ coming from the lattice of odd values of $v-u-1$: for even $K$ the sum of $\ln j^2$ over the odd $j$ with
+$|j|<K$ exceeds $2K\ln K-2K$ by $2\ln2+o(1)$, and the density of $v-u$ at $0$ is about
 $1/\sqrt{\pi m}$. We have not made the error terms rigorous. Evaluated
-exactly in the first-order form, $c(m)$ is $1.423333$, $1.353700$, $1.313931$, $1.225405$ and $1.156825$ at $m=20$,
-$30$, $40$, $100$ and $400$, and $(c(m)-1.096173)\sqrt m$ is $1.463$, $1.411$, $1.377$, $1.292$ and $1.213$, approaching
+exactly in the first-order form, $c_1(m)$ is $1.423333$, $1.353700$, $1.313931$, $1.225405$ and $1.156825$ at $m=20$,
+$30$, $40$, $100$ and $400$, and $(c_1(m)-1.096173)\sqrt m$ is $1.463$, $1.411$, $1.377$, $1.292$ and $1.213$, approaching
 $2/\sqrt\pi=1.128$ at the rate $1/\sqrt m$. For the exact sum of Lemma~\ref{lem:sum} at $k=61$ and
-$\varepsilon=10^{-4}$, $2^{-15}$ and $10^{-6}$, the ratio minus $(k-1)\log\frac1P-\log\frac1\varepsilon-\frac12\log m$
-is $1.3540$, $1.3537$ and $1.3537$, against $c(30)=1.353700$, and at $k=81$ and $\varepsilon=10^{-4}$, $10^{-6}$
-and $2^{-20}$ it is $1.3142$, $1.3139$ and $1.3139$, against $c(40)=1.313931$. Once $\varepsilon2^m$ is of order $1$ the first-order form fails, and the ratio
+$\eta=10^{-4}$, $2^{-15}$ and $10^{-6}$, the ratio minus $(k-1)\log\frac1P-\log\frac1\eta-\frac12\log m$
+is $1.3540$, $1.3537$ and $1.3537$, against $c_1(30)=1.353700$, and at $k=81$ and $\eta=10^{-4}$, $10^{-6}$
+and $2^{-20}$ it is $1.3142$, $1.3139$ and $1.3139$, against $c_1(40)=1.313931$. Once $\eta2^m$ is of order $1$ the first-order form fails, and the ratio
 moves to the value of Theorem~\ref{thm:half}.
 \end{remark}
 
@@ -404,36 +405,36 @@ $G'(n_1)=\frac12\ln\frac{n_1}{Pq\,n_2}+\ln P$, which vanishes at $n_1=2mq$, and 
 So $G\ge G(2mq)=mq\ln\frac1P+mP\ln P+(2mP-1)\ln\frac1P=(m-1)\ln\frac1P$.
 \end{proof}
 
-Fix $(u,v)\in W_\lambda$ and let $\Lambda(\theta)=\ln Q_{uv}(e^{\ii\theta})-\ii m\theta$ for complex $\theta$ with
-$|\theta-\theta^*|\le\delta$, where $\delta>0$ is so small that $e^{\ii\theta}$ stays away from $1$, $-q/P$ and $-P/q$,
+Fix $(u,v)\in W_\lambda$ and let $\Lambda(\theta)=\ln Q_{uv}(e^{\ii\theta})-\ii m\theta$ for complex $\theta$ in a closed
+disc centred at $\theta^*$ and so small that $e^{\ii\theta}$ stays away from $1$, $-q/P$ and $-P/q$,
 the zeros of $z-1$, $X$ and $Y$; the logarithm is the branch continuous in this disc. Then $|\Lambda''|,|\Lambda'''|\le Cm$
 on the disc. For real $\theta$, $\mathrm{Re}\,\Lambda(\theta)=\rho(\cos\theta)$, so $\mathrm{Re}\,\Lambda'(\theta_0)=0$ and
 $\mathrm{Re}\,\Lambda''(\theta_0)=\rho''(w_0)\sin^2\theta_0\le-cm$. Put
 \[
-b=\mathrm{Im}\,\Lambda'(\theta_0),\qquad A=-\Lambda''(\theta_0),\qquad
-T_{uv}=\frac{1}{\sqrt{2\pi A}}\exp\Bigl(\Lambda(\theta_0)-\frac{b^2}{2A}\Bigr).
+\omega=\mathrm{Im}\,\Lambda'(\theta_0),\qquad \Omega=-\Lambda''(\theta_0),\qquad
+T_{uv}=\frac{1}{\sqrt{2\pi\Omega}}\exp\Bigl(\Lambda(\theta_0)-\frac{\omega^2}{2\Omega}\Bigr).
 \]
 
 \begin{lemma}\label{lem:laplace}
-On $W_\lambda$: $|b|\le C\sqrt m$, $|T_{uv}|\ge c\,m^{-1/2}e^{\rho(w_0)}$, and
-$t_{uv}=2\,\mathrm{Re}\,T_{uv}+O(|T_{uv}|\,m^{-1/5})$.
+On $W_\lambda$: $|\omega|\le C\sqrt m$, $|T_{uv}|\ge c\,m^{-1/2}e^{\rho(w_0)}$, and
+$\tau_{uv}=2\,\mathrm{Re}\,T_{uv}+O(|T_{uv}|\,m^{-1/5})$.
 \end{lemma}
 
 \begin{proof}
-With $a=u/m$ and $a'=v/m$, $\Lambda'(\theta)/m$ differs by $O(1/m)$ from
+The function $\Lambda'(\theta)/m$ differs by $O(1/m)$ from
 \[
-\ii z\Bigl(\frac{a+a'}{z-1}+\frac{(1-a)P}{X(z)}+\frac{(1-a')q}{Y(z)}\Bigr)-\ii,\qquad z=e^{\ii\theta},
+\ii z\Bigl(\frac{(u+v)/m}{z-1}+\frac{(1-u/m)P}{X(z)}+\frac{(1-v/m)q}{Y(z)}\Bigr)-\ii,\qquad z=e^{\ii\theta},
 \]
-a smooth function of $(a,a',\theta)$. It vanishes at $a=a'=q$, $\theta=\theta^*$: by~\eqref{eq:ident},
+a smooth function of $(u/m,v/m,\theta)$. It vanishes at $u/m=v/m=q$, $\theta=\theta^*$: by~\eqref{eq:ident},
 $1/(z^*-1)=\overline{X^*}/z^*$, $1/X^*=\overline{X^*}/P$ and $1/Y^*=X^*/(Pz^*)$, where $X^*=X(z^*)$, so
 \[
 z^*\Bigl(\frac{2q}{z^*-1}+\frac{P^2}{X^*}+\frac{Pq}{Y^*}\Bigr)=2q\overline{X^*}+Pz^*\overline{X^*}+qX^*
 =3q^2+P^2+4Pq\,w^*=1 .
 \]
-The rest is the proof of~\cite[Lemma~5]{Shm9}. Since $a-q$, $a'-q$ and $\theta_0-\theta^*$ are $O(m^{-1/2})$,
-$|\Lambda'(\theta_0)|\le C\sqrt m$, and $\mathrm{Re}(b^2/A)=b^2\mathrm{Re}A/|A|^2\le C$, which gives the lower bound
-on $|T_{uv}|$. By Cauchy's formula~\cite[Chapter~VIII]{FS09}, $t_{uv}=\frac1{2\pi}\int_{-\pi}^\pi e^{\Lambda(\theta)}d\theta$.
-On $J_+=\{|\theta-\theta_0|\le m^{-2/5}\}$, Taylor's formula $\Lambda(\theta_0+h)=\Lambda(\theta_0)+\ii bh-\frac12Ah^2+O(m|h|^3)$
+The rest is the proof of~\cite[Lemma~5]{Shm9}. Since $u/m-q$, $v/m-q$ and $\theta_0-\theta^*$ are $O(m^{-1/2})$,
+$|\Lambda'(\theta_0)|\le C\sqrt m$, and $\mathrm{Re}(\omega^2/\Omega)=\omega^2\mathrm{Re}\,\Omega/|\Omega|^2\le C$, which gives the lower bound
+on $|T_{uv}|$. By Cauchy's formula~\cite[Chapter~VIII]{FS09}, $\tau_{uv}=\frac1{2\pi}\int_{-\pi}^\pi e^{\Lambda(\theta)}d\theta$.
+On $J_+=\{|\theta-\theta_0|\le m^{-2/5}\}$, Taylor's formula $\Lambda(\theta)=\Lambda(\theta_0)+\ii\omega(\theta-\theta_0)-\frac12\Omega(\theta-\theta_0)^2+O(m|\theta-\theta_0|^3)$
 and a Gaussian integral give $T_{uv}+O(|T_{uv}|m^{-1/5})$; the integral over $J_-=-J_+$ is its complex conjugate,
 as $Q_{uv}$ has real coefficients. Off $J_+\cup J_-$, $|\cos\theta-w_0|\ge c|\theta\mp\theta_0|$ because $\theta_0$
 stays away from $0$ and $\pi$, and $\rho''\le-cm$ gives a modulus at most $e^{\rho(w_0)-cm^{1/5}}$.
@@ -467,10 +468,10 @@ so the weights in a block differ by a factor at most $2$, and the bad values and
 $\beta_u\beta_v$-weight at most $6\varepsilon+o(1)$ in all.
 
 Let $(u,v)\in W_\lambda$ have $|\cos\arg T_{uv}|\ge\varepsilon$. By Lemma~\ref{lem:laplace},
-$|t_{uv}|\ge\varepsilon|T_{uv}|\ge c\varepsilon m^{-1/2}e^{\rho(w_0)}$, and with $2m-u-v=n_2-1$ and
+$|\tau_{uv}|\ge\varepsilon|T_{uv}|\ge c\varepsilon m^{-1/2}e^{\rho(w_0)}$, and with $2m-u-v=n_2-1$ and
 Lemma~\ref{lem:exponent},
 \[
-r_{uv}\ge\frac{2|t_{uv}|}{P^{n_2-1}}-(P-q)\ge c\varepsilon m^{-1/2}P^{-(m-1)}-1 ,
+r_{uv}\ge\frac{2|\tau_{uv}|}{P^{n_2-1}}-(P-q)\ge c\varepsilon m^{-1/2}P^{-(m-1)}-1 ,
 \]
 so $\Psi(r_{uv})\ge\log r_{uv}^2\ge2m\log\frac1P-\log m-C_\varepsilon$. By Chebyshev's inequality $W_\lambda$ has weight
 at least $(1-Pq/\lambda^2)^2$, and since $\Psi\ge0$, Lemma~\ref{lem:sum} gives
@@ -484,7 +485,7 @@ gives $\liminf\ge1$. \qed
 
 Lemma~\ref{lem:sum} reduces the ratio to $(m+1)^2$ terms whose ingredients are integers over powers of the denominator
 of $P$; the code computes them exactly in integer arithmetic and evaluates each term of $\Phi$ as
-$p\log(1+q/p)$ with a $\log(1+\cdot)$ routine. For $t=1$ the values agree with those of~\cite{Shm9}, and for $t=0,1,2,3$
+$a\log(1+b/a)$ with a $\log(1+\cdot)$ routine. For $t=1$ the values agree with those of~\cite{Shm9}, and for $t=0,1,2,3$
 at $k\le27$ with a rational-arithmetic implementation. The quotient of $E_x(F_{k,t})/\Inf_x(F_{k,t})$ by
 $(k-1)\log_2(1/P_t)$, with $P_2=\frac{11}{16}$, $P_3=\frac{21}{32}$ and $P_4=\frac{163}{256}$, is:
 \begin{center}
@@ -538,6 +539,78 @@ Code and outputs: \url{https://github.com/yspennstate/fei-forced-coordinate-bias
 
 The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\appendix
+\section{Notation}\label{app:notation}
+
+Symbols are listed roughly in the order in which they first appear, and the last column gives that place. The letters $a$ and $b$ are also the arguments of $\Phi$; $n$ and $j$ are generic integers in~\eqref{eq:binom} and in Stirling's formula, $j$ and $K$ are the index and the bound of the lattice sum in Remark~\ref{rem:near}, and $\nu$ is the exponent in $[z^\nu]$.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
+\toprule
+Symbol & Meaning & First appears \\
+\midrule
+\endhead
+$f$, $n$ & a Boolean function $\{0,1\}^n\to\{-1,1\}$, and its number of variables & Section~\ref{sec:intro} \\
+$S$, $\hat f(S)$, $\chi_S$ & a set of coordinates, the Fourier coefficient of $f$ at $S$, and the character of $S$ & Section~\ref{sec:intro} \\
+$U$ & the spectral sample, a random set with $\Pr[U=S]=\hat f(S)^2$ & Section~\ref{sec:intro} \\
+$H(\cdot)$, $\E$, $\Pr$ & Shannon entropy in bits, expectation and probability & Section~\ref{sec:intro} \\
+$C_{\mathrm{FEI}}$ & the constant of the Fourier entropy-influence conjecture $H(U)\le C_{\mathrm{FEI}}\,\E|U|$ & Section~\ref{sec:intro} \\
+$x$ & the hidden coordinate, the coordinate under study; it is uniform on $\{0,1\}$ & Section~\ref{sec:intro} \\
+$E_x$, $\Inf_x$ & the erasure entropy $H(\mathbf 1[x\in U]\mid U\setminus\{x\})$ and the influence $\Pr[x\in U]$ at $x$ & Section~\ref{sec:intro} \\
+$\mathbf 1[\cdot]$ & the indicator of an event & Section~\ref{sec:intro} \\
+$h_2$, $h_e$ & the binary entropy function in bits, and in nats & \eqref{eq:upper}; proof of Theorem~\ref{thm:half} \\
+$e$ & the base of the natural logarithm & \eqref{eq:upper} \\
+$k$, $m$ & an odd number of inputs, and $m=(k-1)/2$ & Section~\ref{sec:intro} \\
+$y$, $y_j$ & a point of $\{0,1\}^k$, and its $j$-th coordinate & Section~\ref{sec:intro} \\
+$y^0$, $y^1$ & the point with $y^0_j=1$ exactly for $j\le m$, and the point that differs from it only in $y^1_{m+1}=1$ & Section~\ref{sec:intro} \\
+$\MAJ_k$, $M$ & the majority of $k$ inputs, and $\MAJ_k$ with $y^1$ removed from its true set & Section~\ref{sec:intro} \\
+$\tilde f_k$ & $M(y)\vee(x\wedge[y\ge y^0])$, a function of $y$ and $x$ & Section~\ref{sec:intro} \\
+$t$, $F_{k,t}$ & a positive integer, and $\tilde f_k$ with $y_j$ replaced by ``at least $t$ of $2t$'' of a fresh block for $j\le m$ and by ``at least $t+1$ of $2t$'' for $j>m$ & Section~\ref{sec:intro} \\
+$\mathrm{Bin}(2t,\frac12)$, $P_t$ & a binomial variable, and $\Pr[\mathrm{Bin}(2t,\frac12)\ge t]$ & Section~\ref{sec:intro} \\
+$P$, $E_x^P$, $\Inf_x^P$ & a bias, and the erasure entropy and the influence of $x$ in the orthonormal basis of the product measure with $\Pr[y_j=1]=P$ for $j\le m$ and $1-P$ for $j>m$ & Section~\ref{sec:intro} \\
+$\alpha_P$ & $\arccos\frac{2P-1}{2P}$, the rotation angle & Section~\ref{sec:intro} \\
+$\Psi(r)$, $r$ & $r^2\log_2(1+r^{-2})+\log_2(1+r^2)$, and its argument & Section~\ref{sec:intro} \\
+$C$, $c$ & positive constants that may change from line to line: absolute in Section~\ref{sec:half}, depending on $P$ and $\lambda$ in Sections~\ref{sec:circle} and~\ref{sec:proof} & Theorem~\ref{thm:half} \\
+$c_0$ & $\frac34\log_2e-\frac12\log_2\frac\pi2$ & Theorem~\ref{thm:half} \\
+$b$ & an index, $0\le b\le m-1$, with $u+v=2b+1$ & Theorem~\ref{thm:half} \\
+$\log$, $\ln$ & the logarithms to base $2$ and to base $e$ & Section~\ref{sec:sum} \\
+$\Phi(a,b)$ & $a\log\frac{a+b}a+b\log\frac{a+b}b$, so that $\Psi(r)=\Phi(r^2,1)$ & Section~\ref{sec:sum} \\
+$q$, $\sigma$ & $1-P$, and $\sqrt{Pq}$ & Section~\ref{sec:sum} \\
+$\phi_j$, $\mu_j$ & the basis function $(y_j-\mu_j)/\sigma$ of the coordinate $j$, and the mean of $y_j$, $P$ for $j\le m$ and $q$ for $j>m$ & Section~\ref{sec:sum} \\
+$D$, $\bar A$, $N$ & the parts of $\tilde f_k=\bar A+(2x-1)D$ in $\pm1$ values, and the indicator of $|y|\ge m+1$ & Section~\ref{sec:sum} \\
+$u$, $v$ & $|S\cap\{1,\dots,m\}|$ and $|S\cap\{m+2,\dots,k\}|$ & Section~\ref{sec:sum} \\
+$z$, $X(z)$, $Y(z)$ & a complex variable, $q+Pz$ and $P+qz$ & Section~\ref{sec:sum} \\
+$[z^\nu]$ & the coefficient of $z^\nu$ in a polynomial & Section~\ref{sec:sum} \\
+$\Pi_{uv}(z)$, $\tau_{uv}$ & $(z-1)^{u+v}X(z)^{m-u}Y(z)^{m+1-v}$, and the sum of its coefficients at $z^\nu$, $\nu\ge m+1$ & Section~\ref{sec:sum} \\
+$y'$ & a point of $\{0,1\}^k$ & proof of Lemma~\ref{lem:coef} \\
+$\beta_u$ & $\binom mu q^uP^{m-u}$ & Section~\ref{sec:sum} \\
+$r_{uv}$ & $|\hat{\bar A}(S)|/|\hat D(S)|$ for the sets $S\not\ni m+1$ with counts $u$, $v$ & Section~\ref{sec:sum} \\
+$Q_{uv}(z)$ & $\Pi_{uv}(z)/(z-1)$, a polynomial when $u+v\ge1$ & Section~\ref{sec:sum} \\
+$a$, $\kappa_a$ & an index, $0\le a\le2m$, and $[z^m](1-z)^a(1+z)^{2m-a}$, a value of a Krawtchouk polynomial & Section~\ref{sec:half} \\
+$\xi$ & a formal variable & proof of Lemma~\ref{lem:kraw} \\
+$s$ & $u+v$; under the weights $\beta_u\beta_v$ at $P=\frac12$ it is binomial with parameters $2m$ and $\frac12$ & proof of Theorem~\ref{thm:half} \\
+$p_b$, $d_b$, $\delta_b$ & $\binom{2m}{2b+1}4^{-m}=\Pr[s=2b+1]$, $2b-m$, and $d_b^2/m$ & proof of Theorem~\ref{thm:half} \\
+$\zeta$ & the distance of the argument of $h_2$ or $h_e$ from $\frac12$; for the binomial coefficients, $d_b/(2m)$ & proof of Theorem~\ref{thm:half} \\
+$B$ & the set of $b$ with $|d_b|\le m/4$ & proof of Theorem~\ref{thm:half} \\
+$\Delta_1$, $\Delta_2$, $\Delta_3$, $\Delta_b$ & the errors in Stirling's formula for $\binom mb$, $\binom{2m}{2b}$ and $\binom{2m}m$, and the error in $\log r^2$ & proof of Theorem~\ref{thm:half} \\
+$\eta$, $c_1(m)$ & $P-\frac12$, and the constant term of the first-order form of the ratio & Remark~\ref{rem:near} \\
+$Z$, $\gamma$ & a standard normal variable, and Euler's constant & Remark~\ref{rem:near} \\
+$\ii$, $\theta$, $\overline{X}$ & the imaginary unit, an angle with $z=e^{\ii\theta}$, and the complex conjugate of $X$ & Section~\ref{sec:circle} \\
+$w$, $R(w)$ & $\cos\theta$, and $P^2+q^2+2Pqw=|X(z)|^2=|Y(z)|^2$ & Section~\ref{sec:circle} \\
+$n_1$, $n_2$ & $u+v-1$ and $2m+1-u-v$ & Section~\ref{sec:circle} \\
+$\rho(w)$, $w_0$ & $\ln|Q_{uv}(e^{\ii\theta})|$ as a function of $w=\cos\theta$, and its maximiser & Section~\ref{sec:circle} \\
+$\lambda$, $W_\lambda$ & a parameter $\lambda\ge1$, and the set of $(u,v)$ with $|u-mq|,|v-mq|\le\lambda\sqrt m$ & Section~\ref{sec:circle} \\
+$w^*$, $\theta^*$, $z^*$, $X^*$ & $\cos\alpha_P$, $\alpha_P$, $e^{\ii\theta^*}$ and $X(z^*)$ & Section~\ref{sec:circle} \\
+$\theta_0$, $z_0$ & $\arccos w_0$ and $e^{\ii\theta_0}$ & Section~\ref{sec:circle} \\
+$G(n_1)$ & the left side of Lemma~\ref{lem:exponent} as a function of a real $n_1$ & proof of Lemma~\ref{lem:exponent} \\
+$\Lambda(\theta)$ & $\ln Q_{uv}(e^{\ii\theta})-\ii m\theta$ near $\theta^*$ & Section~\ref{sec:circle} \\
+$\omega$, $\Omega$, $T_{uv}$ & $\mathrm{Im}\,\Lambda'(\theta_0)$, $-\Lambda''(\theta_0)$, and the saddle-point term $(2\pi\Omega)^{-1/2}\exp(\Lambda(\theta_0)-\omega^2/(2\Omega))$ & Section~\ref{sec:circle} \\
+$J_+$, $J_-$ & the arc $|\theta-\theta_0|\le m^{-2/5}$, and its reflection $-J_+$ & proof of Lemma~\ref{lem:laplace} \\
+$g(z)$ & $(z-1)/X(z)$, so that $Q_{u+1,v}=gQ_{uv}$ & proof of Lemma~\ref{lem:phase} \\
+$\varepsilon$, $C_\varepsilon$ & a small parameter in $(0,\frac14)$, and a constant depending on $\varepsilon$ & Section~\ref{sec:proof} \\
+$L$, $\ell$, $\psi_0$ & a block length, an index $0\le\ell\le L-1$, and a real phase & Section~\ref{sec:proof} \\
+\bottomrule
+\end{longtable}
 
 \begin{thebibliography}{99}
 \bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
