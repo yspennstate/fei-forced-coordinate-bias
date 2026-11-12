@@ -62,7 +62,7 @@ entropy,
 \begin{equation}\label{eq:upper}
 \frac{E_x(f)}{\Inf_x(f)}\le\frac{h_2(\Inf_x(f))}{\Inf_x(f)}\le\log_2\frac{e}{\Inf_x(f)}
 \end{equation}
-for every $f$ and $x$ with $\Inf_x(f)>0$.
+for every $f$ and $x$ with $\Inf_x(f)>0$, where $h_2(p)=-p\log_2p-(1-p)\log_2(1-p)$ is the binary entropy.
 
 The question is which coordinate to take. In~\cite{Shm8} several selection rules are shown to fail on monotone
 functions, among them the rule that takes, among the variables lying both in a shortest minterm and in a shortest
@@ -220,7 +220,7 @@ values satisfy $r\ge\binom mb\ge1$.
 
 For the asymptotics write $p_b=\binom{2m}{2b+1}4^{-m}$ and $\delta_b=(2b-m)^2/m$. The odd binomial coefficients of
 order $2m$ sum to $2^{2m-1}$, so $\sum_bp_b=\frac12$, and if $s$ is binomial with parameters $2m$ and $\frac12$ then
-$\sum_bp_b\delta_b\le\E[(s-1-m)^2]/m=\frac12+\frac1m$. We use $h_2(\frac12+\zeta)\ge1-4\zeta^2$, $|\zeta|\le\frac12$, for the binary entropy $h_2$
+$\sum_bp_b\delta_b\le\E[(s-1-m)^2]/m=\frac12+\frac1m$. We use $h_2(\frac12+\zeta)\ge1-4\zeta^2$, $|\zeta|\le\frac12$, for $h_2$
 and, for $1\le j\le n-1$,
 \begin{equation}\label{eq:binom}
 \frac{2^{nh_2(j/n)}}{\sqrt{8j(n-j)/n}}\le\binom nj\le\frac{2^{nh_2(j/n)}}{\sqrt{2\pi j(n-j)/n}}
